@@ -5,18 +5,18 @@ using System.Linq;
 
 namespace mosaic
 {
-    internal interface ISourceImagesProvider
+    internal interface IImageProvider
     {
         Image GetImage(string name);
 
-        IReadOnlyCollection<string> GetImageNames();
+        IReadOnlyCollection<string> GetNames();
     }
 
-    internal sealed class SourceImagesProvider : ISourceImagesProvider
+    internal sealed class ImageProvider : IImageProvider
     {
         private readonly string _sourceDirectoryPath;
 
-        public SourceImagesProvider(string sourceDirectoryPath)
+        public ImageProvider(string sourceDirectoryPath)
         {
             _sourceDirectoryPath = sourceDirectoryPath;
         }
@@ -27,7 +27,7 @@ namespace mosaic
             return Image.FromFile(path);
         }
 
-        public IReadOnlyCollection<string> GetImageNames()
+        public IReadOnlyCollection<string> GetNames()
         {
             var paths = Directory.GetFiles(_sourceDirectoryPath, "*.jpg");
             return paths.Select(path => Path.GetFileName(path)).ToArray();

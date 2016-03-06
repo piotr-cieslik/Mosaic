@@ -8,14 +8,14 @@
 
         private static void Main(string[] args)
         {
-            var sourceImagesProvider = new SourceImagesProvider(SourceDirectory);
+            var imageProvider = new ImageProvider(SourceDirectory);
             var temporaryImageStorage = new TemporaryImageStorage(TemporaryDirectory);
             var temporaryImageInformationStorage = new TemporaryImageInformationStorage(TemporaryDirectory, ImageInformationsFileName);
 
             temporaryImageStorage.InitializeStorage();
 
             var sourceImagePreprocesor = new SourceImagesPreprocesor(
-                sourceImagesProvider,
+                imageProvider,
                 temporaryImageStorage,
                 temporaryImageInformationStorage);
             sourceImagePreprocesor.Run();

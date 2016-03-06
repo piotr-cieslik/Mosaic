@@ -2,12 +2,12 @@
 {
     internal sealed class SourceImagesPreprocesor
     {
-        private ISourceImagesProvider _sourceImagesProvider;
+        private IImageProvider _sourceImagesProvider;
         private ITemporaryImageInformationStorage _temporaryImageInformationStorage;
         private ITemporaryImageStorage _temporaryImageStorage;
 
         public SourceImagesPreprocesor(
-            ISourceImagesProvider sourceImagesProvider,
+            IImageProvider sourceImagesProvider,
             ITemporaryImageStorage temporaryImageStorage,
             ITemporaryImageInformationStorage temporaryImageInformationStorage)
         {
@@ -18,7 +18,7 @@
 
         public void Run()
         {
-            var names = _sourceImagesProvider.GetImageNames();
+            var names = _sourceImagesProvider.GetNames();
             foreach (var name in names)
             {
                 using (var image = _sourceImagesProvider.GetImage(name))
