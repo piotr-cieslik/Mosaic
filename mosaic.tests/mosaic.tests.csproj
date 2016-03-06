@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AverageHsvValueCalculatorTests.cs" />
+    <Compile Include="ColorSpaces\RgbToHsvConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +63,7 @@
       <Name>mosaic</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AverageHsvValueCalculator.cs" />
+    <Compile Include="ColorSpaces\Hsv.cs" />
+    <Compile Include="ColorSpaces\RgbToHsvConverter.cs" />
     <Compile Include="ImageInformation.cs" />
     <Compile Include="MosaicGenerator.cs" />
     <Compile Include="MosaicPersister.cs" />
