@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using mosaic.ColorSpaces;
-using System.Drawing;
 
 namespace mosaic.tests.ColorSpaces
 {
@@ -29,19 +28,19 @@ namespace mosaic.tests.ColorSpaces
         {
             var testCases = new[]
             {
-                new TestCase(Color.FromArgb(0, 0, 0),       new Hsv(0, 0 ,0)),
-                new TestCase(Color.FromArgb(255, 255, 255), new Hsv(0, 0 ,100)),
+                new TestCase(new Rgb(0, 0, 0),       new Hsv(0, 0 ,0)),
+                new TestCase(new Rgb(255, 255, 255), new Hsv(0, 0 ,100)),
 
-                new TestCase(Color.FromArgb(255, 0, 0),     new Hsv(0, 100 ,100)),
-                new TestCase(Color.FromArgb(0, 255, 0),     new Hsv(120, 100 ,100)),
-                new TestCase(Color.FromArgb(0, 0, 255),     new Hsv(240, 100 ,100)),
+                new TestCase(new Rgb(255, 0, 0),     new Hsv(0, 100 ,100)),
+                new TestCase(new Rgb(0, 255, 0),     new Hsv(120, 100 ,100)),
+                new TestCase(new Rgb(0, 0, 255),     new Hsv(240, 100 ,100)),
 
-                new TestCase(Color.FromArgb(255, 255, 0),     new Hsv(60, 100 ,100)),
-                new TestCase(Color.FromArgb(0, 255, 255),     new Hsv(180, 100 ,100)),
-                new TestCase(Color.FromArgb(255, 0, 255),     new Hsv(300, 100 ,100)),
+                new TestCase(new Rgb(255, 255, 0),     new Hsv(60, 100 ,100)),
+                new TestCase(new Rgb(0, 255, 255),     new Hsv(180, 100 ,100)),
+                new TestCase(new Rgb(255, 0, 255),     new Hsv(300, 100 ,100)),
 
-                new TestCase(Color.FromArgb(192, 192, 192),     new Hsv(0, 0 ,75)),
-                new TestCase(Color.FromArgb(128, 128, 128),     new Hsv(0, 0 ,50)),
+                new TestCase(new Rgb(192, 192, 192),     new Hsv(0, 0 ,75)),
+                new TestCase(new Rgb(128, 128, 128),     new Hsv(0, 0 ,50)),
             };
 
             foreach (var testCase in testCases)
@@ -52,18 +51,18 @@ namespace mosaic.tests.ColorSpaces
 
         private class TestCase
         {
-            private readonly Color _color;
             private readonly Hsv _hsv;
+            private readonly Rgb _rgb;
 
-            public TestCase(Color color, Hsv hsv)
+            public TestCase(Rgb rgb, Hsv hsv)
             {
-                _color = color;
+                _rgb = rgb;
                 _hsv = hsv;
             }
 
             public void Run()
             {
-                var result = _color.ToHsv();
+                var result = _rgb.ToHsv();
                 Assert.AreEqual(_hsv, result);
             }
         }

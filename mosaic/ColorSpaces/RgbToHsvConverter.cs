@@ -5,11 +5,11 @@ namespace mosaic.ColorSpaces
 {
     internal static class RgbToHsvConverter
     {
-        public static Hsv Convert(byte red, byte green, byte blue)
+        public static Hsv ToHsv(this Rgb rgb)
         {
-            var r_ = red / 255.0;
-            var g_ = green / 255.0;
-            var b_ = blue / 255.0;
+            var r_ = rgb.R / 255.0;
+            var g_ = rgb.G / 255.0;
+            var b_ = rgb.B / 255.0;
 
             var cMax = Math.Max(r_, Math.Max(g_, b_));
             var cMin = Math.Min(r_, Math.Min(g_, b_));
@@ -24,7 +24,7 @@ namespace mosaic.ColorSpaces
 
         public static Hsv ToHsv(this Color color)
         {
-            return Convert(color.R, color.G, color.B);
+            return new Rgb(color.R, color.G, color.B).ToHsv();
         }
 
         private static int Hue(double d, double r_, double g_, double b_, double cMax)
