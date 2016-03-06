@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 
 namespace mosaic
 {
@@ -11,9 +11,9 @@ namespace mosaic
     {
         private string _filePath;
 
-        public TemporaryImageInformationStorage(string filePath)
+        public TemporaryImageInformationStorage(string temporaryDirectory, string fileName)
         {
-            _filePath = filePath;
+            _filePath = Path.Combine(temporaryDirectory, fileName);
         }
 
         public void Save(ImageInformation imageInformation)
