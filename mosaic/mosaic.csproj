@@ -64,11 +64,12 @@
   <ItemGroup>
     <Compile Include="AverageHsvValueCalculator.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="ImageMetadata.cs" />
-    <Compile Include="ImageMetadataProvider.cs" />
+    <Compile Include="ImageInformation.cs" />
     <Compile Include="ImageSizeNormalizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemporaryImageInformationStorage.cs" />
+    <Compile Include="TemporaryImageStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
