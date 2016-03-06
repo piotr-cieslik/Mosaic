@@ -64,9 +64,10 @@
   <ItemGroup>
     <Compile Include="AverageHsvValueCalculator.cs" />
     <Compile Include="ImageInformation.cs" />
+    <Compile Include="MosaicGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SourceImageResizer.cs" />
+    <Compile Include="SquareImageGenerator.cs" />
     <Compile Include="SourceImagesPreprocesor.cs" />
     <Compile Include="ImagesProvider.cs" />
     <Compile Include="TemporaryImageInformationStorage.cs" />

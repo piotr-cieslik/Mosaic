@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace mosaic
 {
-    internal static class SourceImageResizer
+    internal static class SquareImageGenerator
     {
         private const int OutputImageResolution = 100;
         private static readonly Rectangle _outputArea = new Rectangle(0, 0, OutputImageResolution, OutputImageResolution);

@@ -4,6 +4,7 @@
     {
         public static string ImageInformationsFileName = "_image_information.txt";
         public static string SourceDirectory = @"C:\Users\Piotr\Desktop\mosaic\";
+        public static string SourceImageFileName = "01.jpg";
         public static string TemporaryDirectory = SourceDirectory + @"temp\";
 
         private static void Main(string[] args)
@@ -19,6 +20,9 @@
                 temporaryImageStorage,
                 temporaryImageInformationStorage);
             sourceImagePreprocesor.Run();
+
+            var mosaicGenerator = new MosaicGenerator(imageProvider);
+            mosaicGenerator.Generate(SourceImageFileName);
         }
     }
 }
