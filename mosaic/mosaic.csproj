@@ -64,7 +64,6 @@
   <ItemGroup>
     <Compile Include="AverageHsvValueCalculator.cs" />
     <Compile Include="ImageInformation.cs" />
-    <Compile Include="ImageSizeNormalizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceImageResizer.cs" />
