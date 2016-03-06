@@ -18,16 +18,15 @@
 
         public void Run()
         {
-            var fileNames = _sourceImagesProvider.GetImageNames();
-
-            foreach (var fileName in fileNames)
+            var names = _sourceImagesProvider.GetImageNames();
+            foreach (var name in names)
             {
-                using (var image = _sourceImagesProvider.GetImage(fileName))
+                using (var image = _sourceImagesProvider.GetImage(name))
                 {
                     var averageHsvValue = AverageHsvValueCalculator.Calculate(image);
-                    var imageInformation = new ImageInformation(fileName, averageHsvValue);
+                    var imageInformation = new ImageInformation(name, averageHsvValue);
 
-                    _temporaryImageStorage.Save(image);
+                    _temporaryImageStorage.Save(image, name);
                     _temporaryImageInformationStorage.Save(imageInformation);
                 }
             }
