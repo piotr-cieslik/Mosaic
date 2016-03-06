@@ -6,8 +6,7 @@ namespace mosaic
     {
         private static void Main(string[] args)
         {
-            var progressMonitor = new ProgressMonitor();
-            var imageSizeNormalizer = new ImageSizeNormalizer(progressMonitor);
+            var imageSizeNormalizer = new ImageSizeNormalizer();
             imageSizeNormalizer.Normalize(Constants.SourceFilesPath, Constants.TemporaryFilesPath, 100);
 
             Console.ReadKey();

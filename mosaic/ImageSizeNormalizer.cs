@@ -7,13 +7,6 @@ namespace mosaic
 {
     internal sealed class ImageSizeNormalizer
     {
-        private readonly IImageSizeNormalizerProgressMonitor _progressMonitor;
-
-        public ImageSizeNormalizer(IImageSizeNormalizerProgressMonitor progressMonitor)
-        {
-            _progressMonitor = progressMonitor;
-        }
-
         public void Normalize(string sourceDirectoryPath, string outputDirectoryPath, int edgeSize)
         {
             CleanOutputDirectory(outputDirectoryPath);
