@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace mosaic
+﻿namespace mosaic
 {
     internal class Program
     {
@@ -20,7 +18,6 @@ namespace mosaic
                 sourceImagesProvider,
                 temporaryImageStorage,
                 temporaryImageInformationStorage);
-
             sourceImagePreprocesor.Run();
         }
     }
