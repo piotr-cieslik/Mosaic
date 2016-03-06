@@ -67,6 +67,7 @@
     <Compile Include="ImageSizeNormalizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SourceImageResizer.cs" />
     <Compile Include="SourceImagesPreprocesor.cs" />
     <Compile Include="SourceImagesProvider.cs" />
     <Compile Include="TemporaryImageInformationStorage.cs" />

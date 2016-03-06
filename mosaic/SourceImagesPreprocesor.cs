@@ -23,10 +23,10 @@
             {
                 using (var image = _sourceImagesProvider.GetImage(name))
                 {
-                    var averageHsvValue = AverageHsvValueCalculator.Calculate(image);
+                    var resizedImage = SourceImageResizer.Resize(image);
+                    var averageHsvValue = AverageHsvValueCalculator.Calculate(resizedImage);
                     var imageInformation = new ImageInformation(name, averageHsvValue);
-
-                    _temporaryImageStorage.Save(image, name);
+                    _temporaryImageStorage.Save(resizedImage, name);
                     _temporaryImageInformationStorage.Save(imageInformation);
                 }
             }

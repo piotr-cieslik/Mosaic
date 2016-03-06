@@ -4,7 +4,7 @@ namespace mosaic
 {
     internal class Program
     {
-        public static string ImageInformationsFileName = "image_information.txt";
+        public static string ImageInformationsFileName = "_image_information.txt";
         public static string SourceDirectory = @"C:\Users\Piotr\Desktop\mosaic\";
         public static string TemporaryDirectory = SourceDirectory + @"temp\";
 
@@ -22,7 +22,6 @@ namespace mosaic
                 temporaryImageInformationStorage);
 
             sourceImagePreprocesor.Run();
-            Console.ReadKey();
         }
     }
 }
