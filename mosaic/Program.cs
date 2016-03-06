@@ -21,8 +21,8 @@
                 temporaryImageInformationStorage);
             sourceImagePreprocesor.Run();
 
-            var mosaicGenerator = new MosaicGenerator(imageProvider);
-            mosaicGenerator.Generate(SourceImageFileName);
+            var mosaicGenerator = new MosaicGenerator(imageProvider, temporaryImageStorage, temporaryImageInformationStorage);
+            mosaicGenerator.Generate(SourceImageFileName, 320, 240, 50);
         }
     }
 }

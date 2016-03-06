@@ -6,6 +6,8 @@ namespace mosaic
 {
     internal interface ITemporaryImageStorage
     {
+        Image Get(string name);
+
         void Save(Image image, string name);
     }
 
@@ -16,6 +18,12 @@ namespace mosaic
         public TemporaryImageStorage(string temporaryDirectory)
         {
             _temporaryDirectory = temporaryDirectory;
+        }
+
+        public Image Get(string name)
+        {
+            var path = Path.Combine(_temporaryDirectory, Path.ChangeExtension(name, ".png"));
+            return Image.FromFile(path);
         }
 
         public void InitializeStorage()
