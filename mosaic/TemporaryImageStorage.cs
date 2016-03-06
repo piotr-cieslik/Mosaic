@@ -26,15 +26,6 @@ namespace mosaic
             return Image.FromFile(path);
         }
 
-        public void InitializeStorage()
-        {
-            if (Directory.Exists(_temporaryDirectory))
-            {
-                Directory.Delete(_temporaryDirectory, true);
-            }
-            Directory.CreateDirectory(_temporaryDirectory);
-        }
-
         public void Save(Image image, string name)
         {
             var path = Path.Combine(_temporaryDirectory, Path.ChangeExtension(name, ".png"));

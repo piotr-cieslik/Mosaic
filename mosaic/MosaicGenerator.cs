@@ -1,5 +1,4 @@
 ﻿using System.Drawing;
-using System.Drawing.Imaging;
 using System.Linq;
 
 namespace mosaic
@@ -7,17 +6,20 @@ namespace mosaic
     internal sealed class MosaicGenerator
     {
         private readonly IImageProvider _imageProvider;
+        private readonly IMosaicPersister _mosaicPersister;
         private readonly ITemporaryImageInformationStorage _temporaryImageInformationStorage;
         private readonly ITemporaryImageStorage _temporaryImageStorage;
 
         public MosaicGenerator(
             IImageProvider imageProvider,
             ITemporaryImageStorage temporaryImageStorage,
-            ITemporaryImageInformationStorage temporaryImageInformationStorage)
+            ITemporaryImageInformationStorage temporaryImageInformationStorage,
+            IMosaicPersister mosaicPersister)
         {
             _imageProvider = imageProvider;
             _temporaryImageStorage = temporaryImageStorage;
             _temporaryImageInformationStorage = temporaryImageInformationStorage;
+            _mosaicPersister = mosaicPersister;
         }
 
         public void Generate(string sourceImageFileName, int width, int height, int tileSize)
@@ -43,7 +45,7 @@ namespace mosaic
                 }
             }
 
-            outputImage.Save(@"C:\Users\Piotr\Desktop\result.jpg", ImageFormat.Jpeg);
+            _mosaicPersister.Save(outputImage);
         }
 
         private Image Resize(Image sourceImage, int width, int height)

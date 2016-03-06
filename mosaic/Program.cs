@@ -1,19 +1,33 @@
-﻿namespace mosaic
+﻿using System.IO;
+
+namespace mosaic
 {
     internal class Program
     {
-        public static string ImageInformationsFileName = "_image_information.txt";
-        public static string SourceDirectory = @"C:\Users\Piotr\Desktop\mosaic\";
-        public static string SourceImageFileName = "01.jpg";
-        public static string TemporaryDirectory = SourceDirectory + @"temp\";
+        public const string ImageInformationsFileName = "_image_information.txt";
+        public const string OutputDirectory = SourceDirectory + @"result\";
+        public const string SourceDirectory = @"C:\Users\Piotr\Desktop\mosaic\";
+        public const string SourceImageFileName = "01.jpg";
+        public const string TemporaryDirectory = SourceDirectory + @"temp\";
+
+        private static void ClearTemporaryStorage()
+        {
+            if (Directory.Exists(TemporaryDirectory))
+            {
+                Directory.Delete(TemporaryDirectory, true);
+            }
+            Directory.CreateDirectory(TemporaryDirectory);
+        }
 
         private static void Main(string[] args)
         {
+            ClearTemporaryStorage();
+            Directory.CreateDirectory(OutputDirectory);
+
             var imageProvider = new ImageProvider(SourceDirectory);
             var temporaryImageStorage = new TemporaryImageStorage(TemporaryDirectory);
             var temporaryImageInformationStorage = new TemporaryImageInformationStorage(TemporaryDirectory, ImageInformationsFileName);
-
-            temporaryImageStorage.InitializeStorage();
+            var mosaicPersister = new MosaicPersister(OutputDirectory);
 
             var sourceImagePreprocesor = new SourceImagesPreprocesor(
                 imageProvider,
@@ -21,7 +35,11 @@
                 temporaryImageInformationStorage);
             sourceImagePreprocesor.Run();
 
-            var mosaicGenerator = new MosaicGenerator(imageProvider, temporaryImageStorage, temporaryImageInformationStorage);
+            var mosaicGenerator = new MosaicGenerator(
+                imageProvider,
+                temporaryImageStorage,
+                temporaryImageInformationStorage,
+                mosaicPersister);
             mosaicGenerator.Generate(SourceImageFileName, 320, 240, 50);
         }
     }
