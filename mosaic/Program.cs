@@ -4,7 +4,6 @@ namespace mosaic
 {
     internal class Program
     {
-        public const string ImageInformationsFileName = "_image_information.txt";
         public const string OutputDirectory = SourceDirectory + @"result\";
         public const string SourceDirectory = @"C:\Users\Piotr\Desktop\mosaic\";
         public const string SourceImageFileName = "01.jpg";
@@ -25,22 +24,19 @@ namespace mosaic
             Directory.CreateDirectory(OutputDirectory);
 
             var imageProvider = new ImageProvider(SourceDirectory);
-            var temporaryImageStorage = new TemporaryImageStorage(TemporaryDirectory);
-            var temporaryImageInformationStorage = new TemporaryImageInformationStorage(TemporaryDirectory, ImageInformationsFileName);
+            var temporaryDirectory = new TemporaryDirectory(TemporaryDirectory);
             var mosaicPersister = new MosaicPersister(OutputDirectory);
 
             var sourceImagePreprocesor = new SourceImagesPreprocesor(
                 imageProvider,
-                temporaryImageStorage,
-                temporaryImageInformationStorage);
+                temporaryDirectory);
             sourceImagePreprocesor.Run();
 
             var mosaicGenerator = new MosaicGenerator(
                 imageProvider,
-                temporaryImageStorage,
-                temporaryImageInformationStorage,
+                temporaryDirectory,
                 mosaicPersister);
-            mosaicGenerator.Generate(SourceImageFileName, 320, 240, 50);
+            mosaicGenerator.Generate(SourceImageFileName, 160, 120, 100);
         }
     }
 }

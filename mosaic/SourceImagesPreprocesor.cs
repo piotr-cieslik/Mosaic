@@ -3,17 +3,14 @@
     internal sealed class SourceImagesPreprocesor
     {
         private IImageProvider _sourceImagesProvider;
-        private ITemporaryImageInformationStorage _temporaryImageInformationStorage;
-        private ITemporaryImageStorage _temporaryImageStorage;
+        private ITemporaryDirectory _temporaryDirectory;
 
         public SourceImagesPreprocesor(
             IImageProvider sourceImagesProvider,
-            ITemporaryImageStorage temporaryImageStorage,
-            ITemporaryImageInformationStorage temporaryImageInformationStorage)
+            ITemporaryDirectory temporaryDirectory)
         {
             _sourceImagesProvider = sourceImagesProvider;
-            _temporaryImageStorage = temporaryImageStorage;
-            _temporaryImageInformationStorage = temporaryImageInformationStorage;
+            _temporaryDirectory = temporaryDirectory;
         }
 
         public void Run()
@@ -26,8 +23,8 @@
                     var resizedImage = SquareImageGenerator.Resize(image);
                     var averageHsvValue = AverageHsvValueCalculator.Calculate(resizedImage);
                     var imageInformation = new ImageInformation(name, averageHsvValue);
-                    _temporaryImageStorage.Save(resizedImage, name);
-                    _temporaryImageInformationStorage.Save(imageInformation);
+                    _temporaryDirectory.Save(resizedImage, name);
+                    _temporaryDirectory.Save(imageInformation);
                 }
             }
         }

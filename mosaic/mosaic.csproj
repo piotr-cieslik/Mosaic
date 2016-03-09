@@ -74,8 +74,7 @@
     <Compile Include="SquareImageGenerator.cs" />
     <Compile Include="SourceImagesPreprocesor.cs" />
     <Compile Include="ImagesProvider.cs" />
-    <Compile Include="TemporaryImageInformationStorage.cs" />
-    <Compile Include="TemporaryImageStorage.cs" />
+    <Compile Include="TemporaryDirectory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

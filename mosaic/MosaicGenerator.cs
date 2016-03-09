@@ -7,18 +7,15 @@ namespace mosaic
     {
         private readonly IImageProvider _imageProvider;
         private readonly IMosaicPersister _mosaicPersister;
-        private readonly ITemporaryImageInformationStorage _temporaryImageInformationStorage;
-        private readonly ITemporaryImageStorage _temporaryImageStorage;
+        private readonly ITemporaryDirectory _temporaryDirectory;
 
         public MosaicGenerator(
             IImageProvider imageProvider,
-            ITemporaryImageStorage temporaryImageStorage,
-            ITemporaryImageInformationStorage temporaryImageInformationStorage,
+            ITemporaryDirectory temporaryDirectory,
             IMosaicPersister mosaicPersister)
         {
             _imageProvider = imageProvider;
-            _temporaryImageStorage = temporaryImageStorage;
-            _temporaryImageInformationStorage = temporaryImageInformationStorage;
+            _temporaryDirectory = temporaryDirectory;
             _mosaicPersister = mosaicPersister;
         }
 
@@ -28,8 +25,8 @@ namespace mosaic
             var sourceImageSmall = Resize(sourceImage, width, height);
 
             var outputImage = new Bitmap(width * tileSize, height * tileSize);
-            var information = _temporaryImageInformationStorage.Get();
-            var image = _temporaryImageStorage.Get(information.First().Name);
+            var information = _temporaryDirectory.Get();
+            var image = _temporaryDirectory.Get(information.First().Name);
             var resizedImage = Resize(image, tileSize, tileSize);
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
 

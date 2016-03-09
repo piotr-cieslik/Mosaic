@@ -1,31 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
 namespace mosaic
 {
-    internal interface ITemporaryImageInformationStorage
+    internal interface ITemporaryDirectory
     {
+        Image Get(string name);
+
         IReadOnlyCollection<ImageInformation> Get();
+
+        void Save(Image image, string name);
 
         void Save(ImageInformation imageInformation);
     }
 
-    internal sealed class TemporaryImageInformationStorage : ITemporaryImageInformationStorage
+    internal sealed class TemporaryDirectory : ITemporaryDirectory
     {
+        public const string ImageInformationsFileName = "_image_information.txt";
         private const char Delimiter = ',';
-        private string _filePath;
+        private readonly string _filePath;
+        private readonly string _temporaryDirectory;
 
-        public TemporaryImageInformationStorage(string temporaryDirectory, string fileName)
+        public TemporaryDirectory(string temporaryDirectory)
         {
-            _filePath = Path.Combine(temporaryDirectory, fileName);
+            _temporaryDirectory = temporaryDirectory;
+            _filePath = Path.Combine(temporaryDirectory, ImageInformationsFileName);
+        }
+
+        public Image Get(string name)
+        {
+            var path = Path.Combine(_temporaryDirectory, Path.ChangeExtension(name, ".png"));
+            return Image.FromFile(path);
         }
 
         public IReadOnlyCollection<ImageInformation> Get()
         {
             var information = CreateInformations().ToArray();
             return information;
+        }
+
+        public void Save(Image image, string name)
+        {
+            var path = Path.Combine(_temporaryDirectory, Path.ChangeExtension(name, ".png"));
+            image.Save(path, ImageFormat.Png);
         }
 
         public void Save(ImageInformation imageInformation)
