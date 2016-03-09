@@ -5,19 +5,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
-namespace mosaic
+namespace mosaic.Directories
 {
-    internal interface ITemporaryDirectory
-    {
-        Image Get(string name);
-
-        IReadOnlyCollection<ImageInformation> Get();
-
-        void Save(Image image, string name);
-
-        void Save(ImageInformation imageInformation);
-    }
-
     internal sealed class TemporaryDirectory : ITemporaryDirectory
     {
         public const string ImageInformationsFileName = "_image_information.txt";

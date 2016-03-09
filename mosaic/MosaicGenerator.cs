@@ -1,27 +1,28 @@
-﻿using System.Drawing;
+﻿using mosaic.Directories;
+using System.Drawing;
 using System.Linq;
 
 namespace mosaic
 {
     internal sealed class MosaicGenerator
     {
-        private readonly IImageProvider _imageProvider;
-        private readonly IMosaicPersister _mosaicPersister;
+        private readonly ISourceDirectory _sourceDirectory;
+        private readonly IOutputDirectory _outputDirectory;
         private readonly ITemporaryDirectory _temporaryDirectory;
 
         public MosaicGenerator(
-            IImageProvider imageProvider,
+            ISourceDirectory sourceDirectory,
             ITemporaryDirectory temporaryDirectory,
-            IMosaicPersister mosaicPersister)
+            IOutputDirectory outputDirectory)
         {
-            _imageProvider = imageProvider;
+            _sourceDirectory = sourceDirectory;
             _temporaryDirectory = temporaryDirectory;
-            _mosaicPersister = mosaicPersister;
+            _outputDirectory = outputDirectory;
         }
 
         public void Generate(string sourceImageFileName, int width, int height, int tileSize)
         {
-            var sourceImage = _imageProvider.GetImage(sourceImageFileName);
+            var sourceImage = _sourceDirectory.GetImage(sourceImageFileName);
             var sourceImageSmall = Resize(sourceImage, width, height);
 
             var outputImage = new Bitmap(width * tileSize, height * tileSize);
@@ -42,7 +43,7 @@ namespace mosaic
                 }
             }
 
-            _mosaicPersister.Save(outputImage);
+            _outputDirectory.Save(outputImage);
         }
 
         private Image Resize(Image sourceImage, int width, int height)

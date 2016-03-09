@@ -3,18 +3,13 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace mosaic
+namespace mosaic.Directories
 {
-    internal interface IMosaicPersister
-    {
-        void Save(Image image);
-    }
-
-    internal sealed class MosaicPersister : IMosaicPersister
+    internal sealed class OutputDirectory : IOutputDirectory
     {
         private readonly string _outputDirectory;
 
-        public MosaicPersister(string outputDirectory)
+        public OutputDirectory(string outputDirectory)
         {
             _outputDirectory = outputDirectory;
         }

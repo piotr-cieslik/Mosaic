@@ -1,24 +1,26 @@
-﻿namespace mosaic
+﻿using mosaic.Directories;
+
+namespace mosaic
 {
     internal sealed class SourceImagesPreprocesor
     {
-        private IImageProvider _sourceImagesProvider;
+        private ISourceDirectory _sourceDirectory;
         private ITemporaryDirectory _temporaryDirectory;
 
         public SourceImagesPreprocesor(
-            IImageProvider sourceImagesProvider,
+            ISourceDirectory sourceDirectory,
             ITemporaryDirectory temporaryDirectory)
         {
-            _sourceImagesProvider = sourceImagesProvider;
+            _sourceDirectory = sourceDirectory;
             _temporaryDirectory = temporaryDirectory;
         }
 
         public void Run()
         {
-            var names = _sourceImagesProvider.GetNames();
+            var names = _sourceDirectory.GetNames();
             foreach (var name in names)
             {
-                using (var image = _sourceImagesProvider.GetImage(name))
+                using (var image = _sourceDirectory.GetImage(name))
                 {
                     var resizedImage = SquareImageGenerator.Resize(image);
                     var averageHsvValue = AverageHsvValueCalculator.Calculate(resizedImage);

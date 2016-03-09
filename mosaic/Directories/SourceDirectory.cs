@@ -3,20 +3,13 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace mosaic
+namespace mosaic.Directories
 {
-    internal interface IImageProvider
-    {
-        Image GetImage(string name);
-
-        IReadOnlyCollection<string> GetNames();
-    }
-
-    internal sealed class ImageProvider : IImageProvider
+    internal sealed class SourceDirectory : ISourceDirectory
     {
         private readonly string _sourceDirectoryPath;
 
-        public ImageProvider(string sourceDirectoryPath)
+        public SourceDirectory(string sourceDirectoryPath)
         {
             _sourceDirectoryPath = sourceDirectoryPath;
         }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using mosaic.Directories;
+using System.IO;
 
 namespace mosaic
 {
@@ -23,19 +24,19 @@ namespace mosaic
             ClearTemporaryStorage();
             Directory.CreateDirectory(OutputDirectory);
 
-            var imageProvider = new ImageProvider(SourceDirectory);
+            var sourceDirectory = new SourceDirectory(SourceDirectory);
             var temporaryDirectory = new TemporaryDirectory(TemporaryDirectory);
-            var mosaicPersister = new MosaicPersister(OutputDirectory);
+            var outputDirectory = new OutputDirectory(OutputDirectory);
 
             var sourceImagePreprocesor = new SourceImagesPreprocesor(
-                imageProvider,
+                sourceDirectory,
                 temporaryDirectory);
             sourceImagePreprocesor.Run();
 
             var mosaicGenerator = new MosaicGenerator(
-                imageProvider,
+                sourceDirectory,
                 temporaryDirectory,
-                mosaicPersister);
+                outputDirectory);
             mosaicGenerator.Generate(SourceImageFileName, 160, 120, 100);
         }
     }
