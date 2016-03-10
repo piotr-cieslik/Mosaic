@@ -12,5 +12,10 @@
         public byte B { get; }
         public byte G { get; }
         public byte R { get; }
+
+        public override string ToString()
+        {
+            return $"R:{R} G:{G} B:{B}";
+        }
     }
 }

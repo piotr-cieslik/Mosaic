@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="AverageHsvValueCalculator.cs" />
     <Compile Include="ColorSpaces\Hsv.cs" />
+    <Compile Include="ColorSpaces\HsvToRgbConverter.cs" />
     <Compile Include="ColorSpaces\Rgb.cs" />
     <Compile Include="ColorSpaces\RgbToHsvConverter.cs" />
     <Compile Include="Directories\IOutputDirectory.cs" />

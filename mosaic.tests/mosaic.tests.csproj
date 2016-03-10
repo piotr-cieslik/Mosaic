@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AverageHsvValueCalculatorTests.cs" />
+    <Compile Include="ColorSpaces\HsvToRgbConverterTests.cs" />
     <Compile Include="ColorSpaces\RgbToHsvConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
