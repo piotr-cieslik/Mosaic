@@ -1,4 +1,4 @@
-﻿using System;
+﻿using mosaic.ColorSpaces;
 using System.Drawing;
 
 namespace mosaic
@@ -14,13 +14,12 @@ namespace mosaic
                 {
                     for (int y = 0; y < bitmap.Height; y++)
                     {
-                        var pixel = bitmap.GetPixel(x, y);
-                        var max = Math.Max(pixel.R, Math.Max(pixel.G, pixel.B));
-                        sum += max;
+                        var hsv = bitmap.GetPixel(x, y).ToHsv();
+                        sum += hsv.V;
                     }
                 }
                 var pixels = bitmap.Width * bitmap.Height;
-                var result = sum / pixels / 255.0m;
+                var result = sum / pixels;
                 return result;
             }
         }
