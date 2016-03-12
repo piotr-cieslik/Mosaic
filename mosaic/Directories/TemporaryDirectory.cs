@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 
 namespace mosaic.Directories
@@ -31,7 +32,7 @@ namespace mosaic.Directories
                 }
                 var values = line.Split(Delimiter);
                 var path = Path.Combine(_temporaryDirectory, values[0]);
-                var averageHsvValue = decimal.Parse(values[1]);
+                var averageHsvValue = decimal.Parse(values[1], CultureInfo.InvariantCulture);
                 temporaryImages.Add(new TemporaryImage(path, averageHsvValue));
             }
             return temporaryImages;
@@ -43,7 +44,7 @@ namespace mosaic.Directories
             var path = Path.Combine(_temporaryDirectory, temporaryFileName);
             image.Save(path, ImageFormat.Png);
 
-            var line = temporaryFileName + Delimiter + averageHsvValue + Environment.NewLine;
+            var line = temporaryFileName + Delimiter + averageHsvValue.ToString(CultureInfo.InvariantCulture) + Environment.NewLine;
             File.AppendAllText(_filePath, line);
         }
     }
