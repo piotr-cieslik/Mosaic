@@ -5,14 +5,15 @@ namespace mosaic
 {
     internal sealed class TemporaryImage
     {
-        private decimal _averageHsvValue;
-        private string _path;
+        private readonly string _path;
 
         public TemporaryImage(string path, decimal averageHsvValue)
         {
             _path = path;
-            _averageHsvValue = averageHsvValue;
+            AverageHsvValue = averageHsvValue;
         }
+
+        public decimal AverageHsvValue { get; }
 
         public Image ChangeHueAndSaturation(Hsv targetHsv)
         {
