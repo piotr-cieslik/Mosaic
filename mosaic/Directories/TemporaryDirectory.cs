@@ -37,15 +37,13 @@ namespace mosaic.Directories
             return temporaryImages;
         }
 
-        public void Save(Image image, string name)
+        public void Save(Image image, string name, decimal averageHsvValue)
         {
-            var path = Path.Combine(_temporaryDirectory, Path.ChangeExtension(name, ".png"));
+            var temporaryFileName = Path.ChangeExtension(name, ".png");
+            var path = Path.Combine(_temporaryDirectory, temporaryFileName);
             image.Save(path, ImageFormat.Png);
-        }
 
-        public void Save(ImageInformation imageInformation)
-        {
-            var line = Path.ChangeExtension(imageInformation.Name, ".png") + Delimiter + imageInformation.AverageHsvValue + Environment.NewLine;
+            var line = temporaryFileName + Delimiter + averageHsvValue + Environment.NewLine;
             File.AppendAllText(_filePath, line);
         }
     }

@@ -7,8 +7,6 @@ namespace mosaic.Directories
     {
         IReadOnlyCollection<TemporaryImage> Get();
 
-        void Save(Image image, string name);
-
-        void Save(ImageInformation imageInformation);
+        void Save(Image image, string name, decimal averageHsvValue);
     }
 }

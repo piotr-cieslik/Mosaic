@@ -24,9 +24,7 @@ namespace mosaic
                 {
                     var resizedImage = SquareImageGenerator.Resize(image);
                     var averageHsvValue = AverageHsvValueCalculator.Calculate(resizedImage);
-                    var imageInformation = new ImageInformation(name, averageHsvValue);
-                    _temporaryDirectory.Save(resizedImage, name);
-                    _temporaryDirectory.Save(imageInformation);
+                    _temporaryDirectory.Save(resizedImage, name, averageHsvValue);
                 }
             }
         }

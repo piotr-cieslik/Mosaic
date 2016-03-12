@@ -70,7 +70,6 @@
     <Compile Include="Directories\IOutputDirectory.cs" />
     <Compile Include="Directories\ISourceDirectory.cs" />
     <Compile Include="Directories\ITemporaryDirectory.cs" />
-    <Compile Include="ImageInformation.cs" />
     <Compile Include="MosaicGenerator.cs" />
     <Compile Include="Directories\OutputDirectory.cs" />
     <Compile Include="Program.cs" />
