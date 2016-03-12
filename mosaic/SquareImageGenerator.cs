@@ -5,7 +5,7 @@ namespace mosaic
 {
     internal static class SquareImageGenerator
     {
-        private const int OutputImageResolution = 100;
+        private const int OutputImageResolution = 50;
         private static readonly Rectangle _outputArea = new Rectangle(0, 0, OutputImageResolution, OutputImageResolution);
 
         public static Image Resize(Image sourceImage)

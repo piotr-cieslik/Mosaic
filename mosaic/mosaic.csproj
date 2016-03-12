@@ -79,6 +79,7 @@
     <Compile Include="SourceImagesPreprocesor.cs" />
     <Compile Include="Directories\SourceDirectory.cs" />
     <Compile Include="Directories\TemporaryDirectory.cs" />
+    <Compile Include="TemporaryImage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

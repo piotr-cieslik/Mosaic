@@ -1,4 +1,6 @@
-﻿using mosaic.Directories;
+﻿using mosaic.ColorSpaces;
+using mosaic.Directories;
+using System;
 using System.Drawing;
 using System.Linq;
 
@@ -6,8 +8,8 @@ namespace mosaic
 {
     internal sealed class MosaicGenerator
     {
-        private readonly ISourceDirectory _sourceDirectory;
         private readonly IOutputDirectory _outputDirectory;
+        private readonly ISourceDirectory _sourceDirectory;
         private readonly ITemporaryDirectory _temporaryDirectory;
 
         public MosaicGenerator(
@@ -23,12 +25,10 @@ namespace mosaic
         public void Generate(string sourceImageFileName, int width, int height, int tileSize)
         {
             var sourceImage = _sourceDirectory.GetImage(sourceImageFileName);
-            var sourceImageSmall = Resize(sourceImage, width, height);
+            var sourceImageSmall = new Bitmap(Resize(sourceImage, width, height));
 
             var outputImage = new Bitmap(width * tileSize, height * tileSize);
-            var information = _temporaryDirectory.Get();
-            var image = _temporaryDirectory.Get(information.First().Name);
-            var resizedImage = Resize(image, tileSize, tileSize);
+            var temporaryImages = _temporaryDirectory.Get();
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
 
             using (var g = Graphics.FromImage(outputImage))
@@ -37,9 +37,15 @@ namespace mosaic
                 {
                     for (var y = 0; y < height; y++)
                     {
-                        var targetArea = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
-                        g.DrawImage(resizedImage, targetArea, sourceArea, GraphicsUnit.Pixel);
+                        var sourcePixelHsvValues = sourceImageSmall.GetPixel(x, y).ToHsv();
+                        var temporaryImage = temporaryImages.First();
+                        using (var tile = temporaryImage.ChangeHueAndSaturation(sourcePixelHsvValues))
+                        {
+                            var targetArea = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
+                            g.DrawImage(tile, targetArea, sourceArea, GraphicsUnit.Pixel);
+                        }
                     }
+                    Console.WriteLine(x * 1.0 / width);
                 }
             }
 

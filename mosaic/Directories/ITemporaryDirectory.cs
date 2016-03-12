@@ -5,9 +5,7 @@ namespace mosaic.Directories
 {
     internal interface ITemporaryDirectory
     {
-        Image Get(string name);
-
-        IReadOnlyCollection<ImageInformation> Get();
+        IReadOnlyCollection<TemporaryImage> Get();
 
         void Save(Image image, string name);
 
