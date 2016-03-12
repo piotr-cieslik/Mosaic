@@ -28,15 +28,16 @@ namespace mosaic
             var sourceImagePreprocesor = new SourceImagesPreprocesor(
                 sourceDirectory,
                 temporaryDirectory);
-            //sourceImagePreprocesor.Run();
+
             //ClearTemporaryStorage();
             //Directory.CreateDirectory(OutputDirectory);
+            //sourceImagePreprocesor.Run();
 
             var mosaicGenerator = new MosaicGenerator(
                 sourceDirectory,
                 temporaryDirectory,
                 outputDirectory);
-            mosaicGenerator.Generate(SourceImageFileName, 80, 60, 50);
+            mosaicGenerator.Generate(SourceImageFileName, 160, 120, 50);
         }
     }
 }

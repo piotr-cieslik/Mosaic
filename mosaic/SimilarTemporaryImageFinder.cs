@@ -7,9 +7,9 @@ namespace mosaic
 {
     internal sealed class SimilarTemporaryImageFinder
     {
+        private const decimal BaseTolerance = 0.1m;
         private readonly Random _random;
         private readonly IReadOnlyCollection<TemporaryImage> _temporaryImages;
-        private const decimal Tolerance = 10m;
 
         public SimilarTemporaryImageFinder(IReadOnlyCollection<TemporaryImage> temporaryImages)
         {
@@ -19,8 +19,20 @@ namespace mosaic
 
         public TemporaryImage Find(Hsv hsv)
         {
-            var index = _random.Next(_temporaryImages.Count);
-            return _temporaryImages.ElementAt(index);
+            return Find(hsv, BaseTolerance);
+        }
+
+        private TemporaryImage Find(Hsv hsv, decimal tolerance)
+        {
+            var similarImages = _temporaryImages.Where(ti => ti.AverageHsvValue > hsv.V - tolerance && ti.AverageHsvValue < hsv.V + tolerance).ToArray();
+
+            if (similarImages.Length == 0)
+            {
+                return Find(hsv, tolerance * 2);
+            }
+
+            var index = _random.Next(similarImages.Length);
+            return similarImages[index];
         }
     }
 }
