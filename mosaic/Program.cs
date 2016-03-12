@@ -37,7 +37,7 @@ namespace mosaic
                 sourceDirectory,
                 temporaryDirectory,
                 outputDirectory);
-            mosaicGenerator.Generate(SourceImageFileName, 160, 120, 50);
+            mosaicGenerator.Generate(SourceImageFileName, 320, 240, 50);
         }
     }
 }

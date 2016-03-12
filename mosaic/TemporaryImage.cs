@@ -1,5 +1,6 @@
 ﻿using mosaic.ColorSpaces;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace mosaic
 {
@@ -17,20 +18,33 @@ namespace mosaic
 
         public Image ChangeHueAndSaturation(Hsv targetHsv)
         {
-            var image = LoadImage();
-            for (var rx = 0; rx < image.Width; rx++)
+            var bitmap = LoadImage();
+            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+
+            byte bitsPerPixel = 32;
+            var size = bitmapData.Stride * bitmapData.Height;
+            byte[] data = new byte[size];
+            System.Runtime.InteropServices.Marshal.Copy(bitmapData.Scan0, data, 0, size);
+
+            for (int i = 0; i < size; i += bitsPerPixel / 8)
             {
-                for (var ry = 0; ry < image.Width; ry++)
-                {
-                    var hsv = image.GetPixel(rx, ry).ToHsv();
-                    var newHsv = new Hsv(targetHsv.H, targetHsv.S, hsv.V);
-                    var newRgb = newHsv.ToRgb();
-                    var newColor = Color.FromArgb(255, newRgb.R, newRgb.G, newRgb.B);
-                    image.SetPixel(rx, ry, newColor);
-                }
+                var b = data[i];
+                var g = data[i + 1];
+                var r = data[i + 2];
+
+                var hsv = new Rgb(r, g, b).ToHsv();
+                var newHsv = new Hsv(targetHsv.H, targetHsv.S, hsv.V);
+                var newRgb = newHsv.ToRgb();
+
+                data[i] = newRgb.B;
+                data[i + 1] = newRgb.G;
+                data[i + 2] = newRgb.R;
             }
 
-            return image;
+            System.Runtime.InteropServices.Marshal.Copy(data, 0, bitmapData.Scan0, data.Length);
+            bitmap.UnlockBits(bitmapData);
+
+            return bitmap;
         }
 
         private Bitmap LoadImage()
