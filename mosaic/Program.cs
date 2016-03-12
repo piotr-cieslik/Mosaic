@@ -5,10 +5,10 @@ namespace mosaic
 {
     internal class Program
     {
-        public const string OutputDirectory = SourceDirectory + @"result\";
-        public const string SourceDirectory = @"C:\Users\Piotr\Desktop\mosaic\";
-        public const string SourceImageFileName = "01.jpg";
-        public const string TemporaryDirectory = SourceDirectory + @"temp\";
+        public const string OutputDirectory = @"C:\Users\Piotr\Desktop\mosaic\result\";
+        public const string SourceDirectory = @"E:\zdjęcia\[2014-09] USA\małe\";
+        public const string SourceImageFileName = "IMG_0026.jpg";
+        public const string TemporaryDirectory = @"C:\Users\Piotr\Desktop\mosaic\temp\";
 
         private static void ClearTemporaryStorage()
         {
@@ -21,9 +21,6 @@ namespace mosaic
 
         private static void Main(string[] args)
         {
-            ClearTemporaryStorage();
-            Directory.CreateDirectory(OutputDirectory);
-
             var sourceDirectory = new SourceDirectory(SourceDirectory);
             var temporaryDirectory = new TemporaryDirectory(TemporaryDirectory);
             var outputDirectory = new OutputDirectory(OutputDirectory);
@@ -31,7 +28,9 @@ namespace mosaic
             var sourceImagePreprocesor = new SourceImagesPreprocesor(
                 sourceDirectory,
                 temporaryDirectory);
-            sourceImagePreprocesor.Run();
+            //sourceImagePreprocesor.Run();
+            //ClearTemporaryStorage();
+            //Directory.CreateDirectory(OutputDirectory);
 
             var mosaicGenerator = new MosaicGenerator(
                 sourceDirectory,

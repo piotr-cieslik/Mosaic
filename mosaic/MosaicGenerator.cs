@@ -2,7 +2,6 @@
 using mosaic.Directories;
 using System;
 using System.Drawing;
-using System.Linq;
 
 namespace mosaic
 {
@@ -31,15 +30,16 @@ namespace mosaic
             var temporaryImages = _temporaryDirectory.Get();
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
 
+            var finder = new SimilarTemporaryImageFinder(temporaryImages);
             using (var g = Graphics.FromImage(outputImage))
             {
                 for (var x = 0; x < width; x++)
                 {
                     for (var y = 0; y < height; y++)
                     {
-                        var sourcePixelHsvValues = sourceImageSmall.GetPixel(x, y).ToHsv();
-                        var temporaryImage = temporaryImages.First();
-                        using (var tile = temporaryImage.ChangeHueAndSaturation(sourcePixelHsvValues))
+                        var hsv = sourceImageSmall.GetPixel(x, y).ToHsv();
+                        var temporaryImage = finder.Find(hsv);
+                        using (var tile = temporaryImage.ChangeHueAndSaturation(hsv))
                         {
                             var targetArea = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
                             g.DrawImage(tile, targetArea, sourceArea, GraphicsUnit.Pixel);
