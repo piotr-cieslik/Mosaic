@@ -6,6 +6,23 @@ namespace mosaic.tests
     [TestClass]
     public class AverageHsvValueCalculatorTests
     {
+        //255 0
+        //255 0
+        [TestMethod]
+        public void ShouldReturn_0_5_WhenHalfOfImageIsWhiteAndHalfOfItIsBlack()
+        {
+            var bitmap = new Bitmap(2, 2);
+            var graphic = Graphics.FromImage(bitmap);
+
+            graphic.FillRectangle(Brushes.White, 0, 0, 1, 2);
+            graphic.FillRectangle(Brushes.Black, 1, 0, 1, 2);
+
+            var result = AverageHsvValueCalculator.Calculate(bitmap);
+            var expected = 0.5m;
+
+            Assert.AreEqual(expected, result);
+        }
+
         //0 0
         //0 0
         [TestMethod]
@@ -21,34 +38,17 @@ namespace mosaic.tests
             Assert.AreEqual(expected, result);
         }
 
-        //255 0
-        //255 0
-        [TestMethod]
-        public void ShouldReturn_128_WhenHalfOfImageIsWhiteAndHalfOfItIsBlack()
-        {
-            var bitmap = new Bitmap(2, 2);
-            var graphic = Graphics.FromImage(bitmap);
-
-            graphic.FillRectangle(Brushes.White, 0, 0, 1, 2);
-            graphic.FillRectangle(Brushes.Black, 1, 0, 1, 2);
-
-            var result = AverageHsvValueCalculator.Calculate(bitmap);
-            var expected = 127;
-
-            Assert.AreEqual(expected, result);
-        }
-
         //255 255
         //255 255
         [TestMethod]
-        public void ShouldReturn_255_WhenWholeImageIsWhite()
+        public void ShouldReturn_1_0_WhenWholeImageIsWhite()
         {
             var bitmap = new Bitmap(2, 2);
             var graphic = Graphics.FromImage(bitmap);
             graphic.FillRectangle(Brushes.White, 0, 0, 2, 2);
 
             var result = AverageHsvValueCalculator.Calculate(bitmap);
-            var expected = 255;
+            var expected = 1m;
 
             Assert.AreEqual(expected, result);
         }
