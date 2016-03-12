@@ -6,14 +6,12 @@ namespace mosaic.tests.ColorSpaces
     [TestClass]
     public class HsvToRgbConverterTests
     {
-        private static int TestResolution = 16;
-
         [TestMethod]
         public void ShouldConvertHsvToRgb()
         {
-            for (int r = 0; r < 256; r += TestResolution)
-                for (int g = 0; g < 256; g += TestResolution)
-                    for (int b = 0; b < 256; b += TestResolution)
+            for (int r = 0; r < 256; r++)
+                for (int g = 0; g < 256; g++)
+                    for (int b = 0; b < 256; b++)
                     {
                         var rgb = new Rgb((byte)r, (byte)g, (byte)b);
                         var hsv = rgb.ToHsv();

@@ -7,7 +7,7 @@ namespace mosaic
 {
     internal sealed class SimilarTemporaryImageFinder
     {
-        private const decimal BaseTolerance = 0.1m;
+        private const float BaseTolerance = 0.1f;
         private readonly Random _random;
         private readonly IReadOnlyCollection<TemporaryImage> _temporaryImages;
 
@@ -22,7 +22,7 @@ namespace mosaic
             return Find(hsv, BaseTolerance);
         }
 
-        private TemporaryImage Find(Hsv hsv, decimal tolerance)
+        private TemporaryImage Find(Hsv hsv, float tolerance)
         {
             var similarImages = _temporaryImages.Where(ti => ti.AverageHsvValue > hsv.V - tolerance && ti.AverageHsvValue < hsv.V + tolerance).ToArray();
 

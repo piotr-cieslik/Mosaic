@@ -5,11 +5,11 @@ namespace mosaic
 {
     internal static class AverageHsvValueCalculator
     {
-        public static decimal Calculate(Image image)
+        public static float Calculate(Image image)
         {
             using (var bitmap = new Bitmap(image))
             {
-                var sum = 0.0m;
+                var sum = 0.0f;
                 for (int x = 0; x < bitmap.Width; x++)
                 {
                     for (int y = 0; y < bitmap.Height; y++)

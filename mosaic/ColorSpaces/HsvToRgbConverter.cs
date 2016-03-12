@@ -4,7 +4,7 @@ namespace mosaic.ColorSpaces
 {
     internal static class HsvToRgbConverter
     {
-        public static Rgb GetRgb(decimal r, decimal g, decimal b)
+        public static Rgb GetRgb(float r, float g, float b)
         {
             return new Rgb(ToByte(r), ToByte(g), ToByte(b));
         }
@@ -14,14 +14,14 @@ namespace mosaic.ColorSpaces
             return HsvToRgb(hsv.H, hsv.S, hsv.V);
         }
 
-        private static Rgb HsvToRgb(decimal h, decimal s, decimal v)
+        private static Rgb HsvToRgb(float h, float s, float v)
         {
-            int hi = (int)Math.Floor(h / 60.0m) % 6;
-            decimal f = (h / 60.0m) - Math.Floor(h / 60.0m);
+            int hi = (int)Math.Floor(h / 60.0) % 6;
+            float f = (h / 60.0f) - (float)Math.Floor(h / 60.0);
 
-            decimal p = v * (1.0m - s);
-            decimal q = v * (1.0m - (f * s));
-            decimal t = v * (1.0m - ((1.0m - f) * s));
+            float p = v * (1.0f - s);
+            float q = v * (1.0f - (f * s));
+            float t = v * (1.0f - ((1.0f - f) * s));
 
             Rgb ret;
 
@@ -58,7 +58,7 @@ namespace mosaic.ColorSpaces
             return ret;
         }
 
-        private static byte ToByte(decimal value)
+        private static byte ToByte(float value)
         {
             var rounded = Math.Round(value * 1000 * 255) / 1000;
             return (byte)rounded;

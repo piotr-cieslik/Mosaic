@@ -29,15 +29,15 @@ namespace mosaic.tests.ColorSpaces
             var testCases = new[]
             {
                 new TestCase(new Rgb(0, 0, 0),       new Hsv(0, 0 ,0)),
-                new TestCase(new Rgb(255, 255, 255), new Hsv(0, 0 ,1m)),
+                new TestCase(new Rgb(255, 255, 255), new Hsv(0, 0 ,1)),
 
-                new TestCase(new Rgb(255, 0, 0),     new Hsv(0, 1m ,1m)),
-                new TestCase(new Rgb(0, 255, 0),     new Hsv(120, 1m ,1m)),
-                new TestCase(new Rgb(0, 0, 255),     new Hsv(240, 1m ,1m)),
+                new TestCase(new Rgb(255, 0, 0),     new Hsv(0, 1 ,1)),
+                new TestCase(new Rgb(0, 255, 0),     new Hsv(120, 1 ,1)),
+                new TestCase(new Rgb(0, 0, 255),     new Hsv(240, 1 ,1)),
 
-                new TestCase(new Rgb(255, 255, 0),     new Hsv(60, 1m ,1m)),
-                new TestCase(new Rgb(0, 255, 255),     new Hsv(180, 1m ,1m)),
-                new TestCase(new Rgb(255, 0, 255),     new Hsv(300, 1m ,1m)),
+                new TestCase(new Rgb(255, 255, 0),     new Hsv(60, 1 ,1)),
+                new TestCase(new Rgb(0, 255, 255),     new Hsv(180, 1 ,1)),
+                new TestCase(new Rgb(255, 0, 255),     new Hsv(300, 1 ,1)),
             };
 
             foreach (var testCase in testCases)

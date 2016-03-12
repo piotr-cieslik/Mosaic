@@ -2,16 +2,16 @@
 {
     internal struct Hsv
     {
-        public Hsv(decimal hue, decimal saturation, decimal value) : this()
+        public Hsv(float hue, float saturation, float value) : this()
         {
             H = hue;
             S = saturation;
             V = value;
         }
 
-        public decimal H { get; }
-        public decimal S { get; }
-        public decimal V { get; }
+        public float H { get; }
+        public float S { get; }
+        public float V { get; }
 
         public override string ToString()
         {

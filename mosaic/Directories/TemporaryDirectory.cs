@@ -32,13 +32,13 @@ namespace mosaic.Directories
                 }
                 var values = line.Split(Delimiter);
                 var path = Path.Combine(_temporaryDirectory, values[0]);
-                var averageHsvValue = decimal.Parse(values[1], CultureInfo.InvariantCulture);
+                var averageHsvValue = float.Parse(values[1], CultureInfo.InvariantCulture);
                 temporaryImages.Add(new TemporaryImage(path, averageHsvValue));
             }
             return temporaryImages;
         }
 
-        public void Save(Image image, string name, decimal averageHsvValue)
+        public void Save(Image image, string name, float averageHsvValue)
         {
             var temporaryFileName = Path.ChangeExtension(name, ".png");
             var path = Path.Combine(_temporaryDirectory, temporaryFileName);

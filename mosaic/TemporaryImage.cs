@@ -7,13 +7,13 @@ namespace mosaic
     {
         private readonly string _path;
 
-        public TemporaryImage(string path, decimal averageHsvValue)
+        public TemporaryImage(string path, float averageHsvValue)
         {
             _path = path;
             AverageHsvValue = averageHsvValue;
         }
 
-        public decimal AverageHsvValue { get; }
+        public float AverageHsvValue { get; }
 
         public Image ChangeHueAndSaturation(Hsv targetHsv)
         {
