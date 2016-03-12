@@ -16,7 +16,7 @@ namespace mosaic.Directories
 
         public void Save(Image image)
         {
-            var name = "mosaic_" + DateTime.Now.ToString("yyy-MM-dd HH-MM-ss") + ".jpg";
+            var name = "mosaic_" + DateTime.Now.ToString("yyy-MM-dd HH-mm-ss") + ".jpg";
             image.Save(Path.Combine(_outputDirectory, name), ImageFormat.Jpeg);
         }
     }
