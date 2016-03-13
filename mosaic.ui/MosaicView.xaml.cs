@@ -10,6 +10,7 @@ namespace mosaic.ui
         public MosaicView()
         {
             InitializeComponent();
+            DataContext = new MosaicViewModel();
         }
     }
 }
