@@ -1,13 +1,14 @@
 ﻿using mosaic.Directories;
+using System.Drawing;
 using System.IO;
 
 namespace mosaic
 {
     internal class Program
     {
+        public const string BasicImagePath = @"E:\zdjęcia\[2014-09] USA\małe\IMG_0026.jpg";
         public const string OutputDirectory = @"C:\Users\Piotr\Desktop\mosaic\result\";
         public const string SourceDirectory = @"E:\zdjęcia\[2014-09] USA\małe\";
-        public const string SourceImageFileName = "IMG_0026.jpg";
         public const string TemporaryDirectory = @"C:\Users\Piotr\Desktop\mosaic\temp\";
 
         private static void ClearTemporaryStorage()
@@ -34,10 +35,9 @@ namespace mosaic
             //sourceImagePreprocesor.Run();
 
             var mosaicGenerator = new MosaicGenerator(
-                sourceDirectory,
                 temporaryDirectory,
                 outputDirectory);
-            mosaicGenerator.Generate(SourceImageFileName, 320, 240, 50);
+            mosaicGenerator.Generate(Image.FromFile(BasicImagePath), 320, 240, 50);
         }
     }
 }

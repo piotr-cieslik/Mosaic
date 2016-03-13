@@ -8,24 +8,19 @@ namespace mosaic
     internal sealed class MosaicGenerator
     {
         private readonly IOutputDirectory _outputDirectory;
-        private readonly ISourceDirectory _sourceDirectory;
         private readonly ITemporaryDirectory _temporaryDirectory;
 
         public MosaicGenerator(
-            ISourceDirectory sourceDirectory,
             ITemporaryDirectory temporaryDirectory,
             IOutputDirectory outputDirectory)
         {
-            _sourceDirectory = sourceDirectory;
             _temporaryDirectory = temporaryDirectory;
             _outputDirectory = outputDirectory;
         }
 
-        public void Generate(string sourceImageFileName, int width, int height, int tileSize)
+        public void Generate(Image basicImage, int width, int height, int tileSize)
         {
-            var sourceImage = _sourceDirectory.GetImage(sourceImageFileName);
-            var sourceImageSmall = new Bitmap(Resize(sourceImage, width, height));
-
+            var basicImageSamll = new Bitmap(Resize(basicImage, width, height));
             var outputImage = new Bitmap(width * tileSize, height * tileSize);
             var temporaryImages = _temporaryDirectory.Get();
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
@@ -37,7 +32,7 @@ namespace mosaic
                 {
                     for (var y = 0; y < height; y++)
                     {
-                        var hsv = sourceImageSmall.GetPixel(x, y).ToHsv();
+                        var hsv = basicImageSamll.GetPixel(x, y).ToHsv();
                         var temporaryImage = finder.Find(hsv);
                         using (var tile = temporaryImage.ChangeHueAndSaturation(hsv))
                         {
