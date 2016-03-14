@@ -72,17 +72,14 @@
     <Compile Include="ColorSpaces\RgbToHsvConverter.cs" />
     <Compile Include="Directories\IOutputDirectory.cs" />
     <Compile Include="Directories\ISourceDirectory.cs" />
-    <Compile Include="Directories\ITemporaryDirectory.cs" />
     <Compile Include="MosaicGenerator.cs" />
     <Compile Include="Directories\OutputDirectory.cs" />
     <Compile Include="MosaicGeneratorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimilarTemporaryImageFinder.cs" />
     <Compile Include="SquareImageGenerator.cs" />
-    <Compile Include="SourceImagesPreprocesor.cs" />
     <Compile Include="Directories\SourceDirectory.cs" />
-    <Compile Include="Directories\TemporaryDirectory.cs" />
-    <Compile Include="TemporaryImage.cs" />
+    <Compile Include="Tile.cs" />
+    <Compile Include="TilesCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

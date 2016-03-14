@@ -4,21 +4,20 @@ using System.Drawing.Imaging;
 
 namespace mosaic
 {
-    public sealed class TemporaryImage
+    internal sealed class Tile
     {
-        private readonly string _path;
-
-        public TemporaryImage(string path, float averageHsvValue)
+        public Tile(Image image, float averageHsvValue)
         {
-            _path = path;
+            Image = image;
             AverageHsvValue = averageHsvValue;
         }
 
         public float AverageHsvValue { get; }
+        public Image Image { get; }
 
         internal Image ChangeHueAndSaturation(Hsv targetHsv)
         {
-            var bitmap = LoadImage();
+            var bitmap = new Bitmap(Image);
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
 
             byte bitsPerPixel = 32;
@@ -45,11 +44,6 @@ namespace mosaic
             bitmap.UnlockBits(bitmapData);
 
             return bitmap;
-        }
-
-        private Bitmap LoadImage()
-        {
-            return new Bitmap(_path);
         }
     }
 }

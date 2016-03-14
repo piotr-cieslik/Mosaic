@@ -9,21 +9,16 @@ namespace mosaic
     {
         private readonly IOutputDirectory _outputDirectory;
         private readonly ISourceDirectory _sourceDirectory;
-        private readonly SourceImagesPreprocesor _sourceImagePreprocesor;
-        private readonly ITemporaryDirectory _temporaryDirectory;
+        private readonly TilesCollection _tilesCollection;
 
         public MosaicGenerator(
             ISourceDirectory sourceDirectory,
-            ITemporaryDirectory temporaryDirectory,
             IOutputDirectory outputDirectory)
         {
             _sourceDirectory = sourceDirectory;
-            _temporaryDirectory = temporaryDirectory;
             _outputDirectory = outputDirectory;
 
-            _sourceImagePreprocesor = new SourceImagesPreprocesor(
-                sourceDirectory,
-                temporaryDirectory);
+            _tilesCollection = new TilesCollection(sourceDirectory);
         }
 
         public void Generate(string basicImagePath, int width, int height, int tileSize)
@@ -31,13 +26,11 @@ namespace mosaic
             var basicImage = Image.FromFile(basicImagePath);
             var basicImageSamll = new Bitmap(Resize(basicImage, width, height));
 
-            _sourceImagePreprocesor.Run();
+            _tilesCollection.Fill();
 
             var outputImage = new Bitmap(width * tileSize, height * tileSize);
-            var temporaryImages = _temporaryDirectory.Get();
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
 
-            var finder = new SimilarTemporaryImageFinder(temporaryImages);
             using (var g = Graphics.FromImage(outputImage))
             {
                 for (var x = 0; x < width; x++)
@@ -45,7 +38,7 @@ namespace mosaic
                     for (var y = 0; y < height; y++)
                     {
                         var hsv = basicImageSamll.GetPixel(x, y).ToHsv();
-                        var temporaryImage = finder.Find(hsv);
+                        var temporaryImage = _tilesCollection.FindTileSimilarToColor(hsv);
                         using (var tile = temporaryImage.ChangeHueAndSaturation(hsv))
                         {
                             var targetArea = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);

@@ -10,8 +10,7 @@ namespace mosaic
         {
             var sourceDirectory = new SourceDirectory(sourceDirectoryPath);
             var outputDirectory = new OutputDirectory(outputDirectoryPath);
-            var temporaryDirectory = new TemporaryDirectory(outputDirectoryPath);
-            return new MosaicGenerator(sourceDirectory, temporaryDirectory, outputDirectory);
+            return new MosaicGenerator(sourceDirectory, outputDirectory);
         }
     }
 }
