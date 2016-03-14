@@ -16,6 +16,7 @@ namespace mosaic
         public TilesCollection(ISourceDirectory sourceDirectory)
         {
             _sourceDirectory = sourceDirectory;
+            _tiles = new List<Tile>();
             _random = new Random(0);
         }
 
