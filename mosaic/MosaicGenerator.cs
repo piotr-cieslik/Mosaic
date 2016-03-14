@@ -9,13 +9,21 @@ namespace mosaic
     {
         private readonly IOutputDirectory _outputDirectory;
         private readonly ITemporaryDirectory _temporaryDirectory;
+        private readonly ISourceDirectory _sourceDirectory;
+        private readonly SourceImagesPreprocesor _sourceImagePreprocesor;
 
         public MosaicGenerator(
+            ISourceDirectory sourceDirectory,
             ITemporaryDirectory temporaryDirectory,
             IOutputDirectory outputDirectory)
         {
+            _sourceDirectory = sourceDirectory;
             _temporaryDirectory = temporaryDirectory;
             _outputDirectory = outputDirectory;
+
+            _sourceImagePreprocesor = new SourceImagesPreprocesor(
+                sourceDirectory,
+                temporaryDirectory);
         }
 
         public void Generate(Image basicImage, int width, int height, int tileSize)
@@ -24,6 +32,8 @@ namespace mosaic
             var outputImage = new Bitmap(width * tileSize, height * tileSize);
             var temporaryImages = _temporaryDirectory.Get();
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
+
+            _sourceImagePreprocesor.Run();
 
             var finder = new SimilarTemporaryImageFinder(temporaryImages);
             using (var g = Graphics.FromImage(outputImage))

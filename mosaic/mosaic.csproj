@@ -75,7 +75,6 @@
     <Compile Include="Directories\ITemporaryDirectory.cs" />
     <Compile Include="MosaicGenerator.cs" />
     <Compile Include="Directories\OutputDirectory.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimilarTemporaryImageFinder.cs" />
     <Compile Include="SquareImageGenerator.cs" />
