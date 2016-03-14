@@ -15,7 +15,14 @@ namespace mosaic.ui
             ChooseOutputDirectoryCommand = new DelegateCommand(ChooseOutputDirectory);
             AddSourceDirectoryCommand = new DelegateCommand(AddSourceDirectory);
             RemoveSourceDirectoryCommand = new DelegateCommand(RemoveSourceDirectory);
+            GenerateCommand = new DelegateCommand(Generate);
             SourceDirectories = new ObservableCollection<string>();
+        }
+
+        public ICommand GenerateCommand { get; }
+
+        private void Generate()
+        {
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
