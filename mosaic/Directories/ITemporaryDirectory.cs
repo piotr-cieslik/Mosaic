@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace mosaic.Directories
 {
-    internal interface ITemporaryDirectory
+    public interface ITemporaryDirectory
     {
         IReadOnlyCollection<TemporaryImage> Get();
 

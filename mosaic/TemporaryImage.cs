@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 
 namespace mosaic
 {
-    internal sealed class TemporaryImage
+    public sealed class TemporaryImage
     {
         private readonly string _path;
 
@@ -16,7 +16,7 @@ namespace mosaic
 
         public float AverageHsvValue { get; }
 
-        public Image ChangeHueAndSaturation(Hsv targetHsv)
+        internal Image ChangeHueAndSaturation(Hsv targetHsv)
         {
             var bitmap = LoadImage();
             var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);

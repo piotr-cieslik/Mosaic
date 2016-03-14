@@ -5,12 +5,12 @@ using System.Drawing;
 
 namespace mosaic
 {
-    internal sealed class MosaicGenerator
+    public sealed class MosaicGenerator
     {
         private readonly IOutputDirectory _outputDirectory;
-        private readonly ITemporaryDirectory _temporaryDirectory;
         private readonly ISourceDirectory _sourceDirectory;
         private readonly SourceImagesPreprocesor _sourceImagePreprocesor;
+        private readonly ITemporaryDirectory _temporaryDirectory;
 
         public MosaicGenerator(
             ISourceDirectory sourceDirectory,
@@ -24,6 +24,10 @@ namespace mosaic
             _sourceImagePreprocesor = new SourceImagesPreprocesor(
                 sourceDirectory,
                 temporaryDirectory);
+        }
+
+        public MosaicGenerator()
+        {
         }
 
         public void Generate(Image basicImage, int width, int height, int tileSize)

@@ -7,7 +7,7 @@ using System.IO;
 
 namespace mosaic.Directories
 {
-    internal sealed class TemporaryDirectory : ITemporaryDirectory
+    public sealed class TemporaryDirectory : ITemporaryDirectory
     {
         public const string ImageInformationsFileName = "_image_information.txt";
         private const char Delimiter = ',';
