@@ -5,7 +5,7 @@ using System.IO;
 
 namespace mosaic.Directories
 {
-    internal sealed class OutputDirectory : IOutputDirectory
+    public sealed class OutputDirectory : IOutputDirectory
     {
         private readonly string _outputDirectory;
 

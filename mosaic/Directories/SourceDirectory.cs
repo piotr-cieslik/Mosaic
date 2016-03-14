@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace mosaic.Directories
 {
-    internal sealed class SourceDirectory : ISourceDirectory
+    public sealed class SourceDirectory : ISourceDirectory
     {
         private readonly string _sourceDirectoryPath;
 

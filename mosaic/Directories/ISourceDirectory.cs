@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace mosaic.Directories
 {
-    internal interface ISourceDirectory
+    public interface ISourceDirectory
     {
         Image GetImage(string name);
 

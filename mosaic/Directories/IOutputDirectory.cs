@@ -2,7 +2,7 @@
 
 namespace mosaic.Directories
 {
-    internal interface IOutputDirectory
+    public interface IOutputDirectory
     {
         void Save(Image image);
     }
