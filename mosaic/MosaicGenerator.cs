@@ -26,18 +26,16 @@ namespace mosaic
                 temporaryDirectory);
         }
 
-        public MosaicGenerator()
+        public void Generate(string basicImagePath, int width, int height, int tileSize)
         {
-        }
-
-        public void Generate(Image basicImage, int width, int height, int tileSize)
-        {
+            var basicImage = Image.FromFile(basicImagePath);
             var basicImageSamll = new Bitmap(Resize(basicImage, width, height));
+
+            _sourceImagePreprocesor.Run();
+
             var outputImage = new Bitmap(width * tileSize, height * tileSize);
             var temporaryImages = _temporaryDirectory.Get();
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
-
-            _sourceImagePreprocesor.Run();
 
             var finder = new SimilarTemporaryImageFinder(temporaryImages);
             using (var g = Graphics.FromImage(outputImage))
