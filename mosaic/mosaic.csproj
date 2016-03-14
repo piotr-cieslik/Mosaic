@@ -74,7 +74,6 @@
     <Compile Include="Directories\ISourceDirectory.cs" />
     <Compile Include="MosaicGenerator.cs" />
     <Compile Include="Directories\OutputDirectory.cs" />
-    <Compile Include="MosaicGeneratorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SquareImageGenerator.cs" />
     <Compile Include="Directories\SourceDirectory.cs" />
