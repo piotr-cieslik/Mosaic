@@ -8,6 +8,7 @@ namespace mosaic.ui
     internal sealed class MosaicViewModel : INotifyPropertyChanged
     {
         private string _baseImagePath;
+        private string _outputDirectory;
 
         public MosaicViewModel()
         {
@@ -17,12 +18,6 @@ namespace mosaic.ui
             RemoveSourceDirectoryCommand = new DelegateCommand(RemoveSourceDirectory);
             GenerateCommand = new DelegateCommand(Generate);
             SourceDirectories = new ObservableCollection<string>();
-        }
-
-        public ICommand GenerateCommand { get; }
-
-        private void Generate()
-        {
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,19 +36,22 @@ namespace mosaic.ui
 
         public ICommand ChooseBaseImageCommand { get; }
         public ICommand ChooseOutputDirectoryCommand { get; }
+        public ICommand GenerateCommand { get; }
 
         public string OutputDirectory
         {
             get { return _baseImagePath; }
             set
             {
-                _baseImagePath = value;
+                _outputDirectory = value;
                 NotifyPropertyChanged();
             }
         }
 
         public ICommand RemoveSourceDirectoryCommand { get; }
+
         public string SelectedSourceDirectory { get; set; }
+
         public ObservableCollection<string> SourceDirectories { get; }
 
         private void AddSourceDirectory()
@@ -91,6 +89,10 @@ namespace mosaic.ui
                     OutputDirectory = dialog.SelectedPath;
                 }
             }
+        }
+
+        private void Generate()
+        {
         }
 
         private void NotifyPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
