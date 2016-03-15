@@ -2,6 +2,7 @@
 using mosaic.ui.Messages;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace mosaic.ui.Commands
@@ -29,12 +30,12 @@ namespace mosaic.ui.Commands
             return !string.IsNullOrEmpty(_outputDirectoryPath) && !string.IsNullOrEmpty(_baseImagePath) && _sourceDirectoryPaths.Count != 0;
         }
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
             var sourceDirectory = new SourceDirectory(_sourceDirectoryPaths);
             var outputDirectory = new OutputDirectory(_outputDirectoryPath);
             var generator = new MosaicGenerator(sourceDirectory, outputDirectory);
-            generator.Generate(_baseImagePath, 320, 240, 25);
+            await Task.Run(() => generator.Generate(_baseImagePath, 320, 240, 50));
         }
 
         private void OnBaseImageChanged(BaseImageChanged message)
