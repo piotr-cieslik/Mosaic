@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using mosaic.Directories;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -93,6 +94,10 @@ namespace mosaic.ui
 
         private void Generate()
         {
+            var sourceDirectory = new SourceDirectory(SourceDirectories);
+            var outputDirectory = new OutputDirectory(_outputDirectory);
+            var generator = new MosaicGenerator(sourceDirectory, outputDirectory);
+            generator.Generate(_baseImagePath, 320, 240, 25);
         }
 
         private void NotifyPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
