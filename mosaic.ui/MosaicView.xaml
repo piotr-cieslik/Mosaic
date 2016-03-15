@@ -36,7 +36,7 @@
         </StackPanel>
 
         <Label Grid.Row="4" Grid.Column="0" Content="Gdzie mam zapisać wygenerowany obraz?" />
-        <TextBox IsReadOnly="True" Grid.Row="5" Grid.Column="0" Text="{Binding OutputDirectory}" />
+        <TextBox IsReadOnly="True" Grid.Row="5" Grid.Column="0" Text="{Binding OutputDirectoryPath}" />
         <Button Grid.Row="5" Grid.Column="1" Content="Wybierz" Command="{Binding ChooseOutputDirectoryCommand}" />
 
         <Button Content="Generuj" Grid.Row="6" Grid.Column="0" Command="{Binding GenerateCommand}"></Button>

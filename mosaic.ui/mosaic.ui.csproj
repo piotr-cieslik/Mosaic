@@ -65,7 +65,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\ChooseBaseImageCommand.cs" />
+    <Compile Include="Commands\ChooseOutputDirectoryCommand.cs" />
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="Messages\BaseImageChanged.cs" />
+    <Compile Include="Messages\OutputDirectoryChanged.cs" />
     <Compile Include="MosaicView.xaml.cs">
       <DependentUpon>MosaicView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -100,11 +104,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EventAggregator\EventAggregator.csproj">
+      <Project>{a336bc74-f48e-4434-83c9-3ab240ca3127}</Project>
+      <Name>EventAggregator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\mosaic\mosaic.csproj">
       <Project>{a37c5f59-5a3c-4709-ac3d-cb51b008e5c7}</Project>
       <Name>mosaic</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

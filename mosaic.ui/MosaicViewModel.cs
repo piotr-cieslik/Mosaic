@@ -1,4 +1,6 @@
 ﻿using mosaic.Directories;
+using mosaic.ui.Commands;
+using mosaic.ui.Messages;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -8,17 +10,22 @@ namespace mosaic.ui
 {
     internal sealed class MosaicViewModel : INotifyPropertyChanged
     {
+        private readonly EventAggregator.EventAggregator _eventAggregator;
         private string _baseImagePath;
-        private string _outputDirectory;
+        private string _outputDirectoryPath;
 
         public MosaicViewModel()
         {
-            ChooseBaseImageCommand = new DelegateCommand(ChooseBaseImage);
-            ChooseOutputDirectoryCommand = new DelegateCommand(ChooseOutputDirectory);
+            _eventAggregator = new EventAggregator.EventAggregator();
+            ChooseBaseImageCommand = new ChooseBaseImageCommand(_eventAggregator);
+            ChooseOutputDirectoryCommand = new ChooseOutputDirectoryCommand(_eventAggregator);
             AddSourceDirectoryCommand = new DelegateCommand(AddSourceDirectory);
             RemoveSourceDirectoryCommand = new DelegateCommand(RemoveSourceDirectory);
             GenerateCommand = new DelegateCommand(Generate);
             SourceDirectoryPaths = new ObservableCollection<string>();
+
+            _eventAggregator.Subscribe<BaseImageChanged>(OnBaseImageChanged);
+            _eventAggregator.Subscribe<OutputDirectoryChanged>(OnOutputDirectoryChanged);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,15 +43,17 @@ namespace mosaic.ui
         }
 
         public ICommand ChooseBaseImageCommand { get; }
+
         public ICommand ChooseOutputDirectoryCommand { get; }
+
         public ICommand GenerateCommand { get; }
 
-        public string OutputDirectory
+        public string OutputDirectoryPath
         {
-            get { return _outputDirectory; }
+            get { return _outputDirectoryPath; }
             set
             {
-                _outputDirectory = value;
+                _outputDirectoryPath = value;
                 NotifyPropertyChanged();
             }
         }
@@ -67,35 +76,10 @@ namespace mosaic.ui
             }
         }
 
-        private void ChooseBaseImage()
-        {
-            using (var dialog = new OpenFileDialog())
-            {
-                dialog.Filter = "Image Files (*.bmp, *.jpg, *.jpeg, *.png)|*.bmp;*.jpg;*.jpeg;*.png";
-                DialogResult result = dialog.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    BaseImagePath = dialog.FileName;
-                }
-            }
-        }
-
-        private void ChooseOutputDirectory()
-        {
-            using (var dialog = new FolderBrowserDialog())
-            {
-                DialogResult result = dialog.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    OutputDirectory = dialog.SelectedPath;
-                }
-            }
-        }
-
         private void Generate()
         {
             var sourceDirectory = new SourceDirectory(SourceDirectoryPaths);
-            var outputDirectory = new OutputDirectory(_outputDirectory);
+            var outputDirectory = new OutputDirectory(_outputDirectoryPath);
             var generator = new MosaicGenerator(sourceDirectory, outputDirectory);
             generator.Generate(_baseImagePath, 320, 240, 25);
         }
@@ -103,6 +87,16 @@ namespace mosaic.ui
         private void NotifyPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void OnBaseImageChanged(BaseImageChanged message)
+        {
+            BaseImagePath = message.Path;
+        }
+
+        private void OnOutputDirectoryChanged(OutputDirectoryChanged message)
+        {
+            OutputDirectoryPath = message.Path;
         }
 
         private void RemoveSourceDirectory()
