@@ -65,11 +65,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\AddSourceDirectoryCommand.cs" />
     <Compile Include="Commands\ChooseBaseImageCommand.cs" />
     <Compile Include="Commands\ChooseOutputDirectoryCommand.cs" />
+    <Compile Include="Commands\RemoveSourceDirectoryCommand.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="Messages\BaseImageChanged.cs" />
     <Compile Include="Messages\OutputDirectoryChanged.cs" />
+    <Compile Include="Messages\SourceDirectoryRemoved.cs" />
+    <Compile Include="Messages\SourceDirectoryAdded.cs" />
+    <Compile Include="Messages\SourceDirectorySelectionChanged.cs" />
     <Compile Include="MosaicView.xaml.cs">
       <DependentUpon>MosaicView.xaml</DependentUpon>
       <SubType>Code</SubType>

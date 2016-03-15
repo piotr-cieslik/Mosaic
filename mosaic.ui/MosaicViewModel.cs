@@ -3,7 +3,6 @@ using mosaic.ui.Commands;
 using mosaic.ui.Messages;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace mosaic.ui
@@ -16,16 +15,19 @@ namespace mosaic.ui
 
         public MosaicViewModel()
         {
+            SourceDirectoryPaths = new ObservableCollection<string>();
+
             _eventAggregator = new EventAggregator.EventAggregator();
             ChooseBaseImageCommand = new ChooseBaseImageCommand(_eventAggregator);
             ChooseOutputDirectoryCommand = new ChooseOutputDirectoryCommand(_eventAggregator);
-            AddSourceDirectoryCommand = new DelegateCommand(AddSourceDirectory);
-            RemoveSourceDirectoryCommand = new DelegateCommand(RemoveSourceDirectory);
+            AddSourceDirectoryCommand = new AddSourceDirectoryCommand(_eventAggregator);
+            RemoveSourceDirectoryCommand = new RemoveSourceDirectoryCommand(_eventAggregator);
             GenerateCommand = new DelegateCommand(Generate);
-            SourceDirectoryPaths = new ObservableCollection<string>();
 
             _eventAggregator.Subscribe<BaseImageChanged>(OnBaseImageChanged);
             _eventAggregator.Subscribe<OutputDirectoryChanged>(OnOutputDirectoryChanged);
+            _eventAggregator.Subscribe<SourceDirectoryAdded>(OnSourceDirectoryAdded);
+            _eventAggregator.Subscribe<SourceDirectoryRemoved>(OnSourceDirectoryRemoved);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -60,21 +62,12 @@ namespace mosaic.ui
 
         public ICommand RemoveSourceDirectoryCommand { get; }
 
-        public string SelectedSourceDirectoryPath { get; set; }
+        public string SelectedSourceDirectoryPath
+        {
+            set { _eventAggregator.Publish(new SourceDirectorySelectionChanged(value)); }
+        }
 
         public ObservableCollection<string> SourceDirectoryPaths { get; }
-
-        private void AddSourceDirectory()
-        {
-            using (var dialog = new FolderBrowserDialog())
-            {
-                DialogResult result = dialog.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    SourceDirectoryPaths.Add(dialog.SelectedPath);
-                }
-            }
-        }
 
         private void Generate()
         {
@@ -99,13 +92,14 @@ namespace mosaic.ui
             OutputDirectoryPath = message.Path;
         }
 
-        private void RemoveSourceDirectory()
+        private void OnSourceDirectoryAdded(SourceDirectoryAdded message)
         {
-            var selectedSourceDirectory = SelectedSourceDirectoryPath;
-            if (selectedSourceDirectory != null)
-            {
-                SourceDirectoryPaths.Remove(selectedSourceDirectory);
-            }
+            SourceDirectoryPaths.Add(message.Path);
+        }
+
+        private void OnSourceDirectoryRemoved(SourceDirectoryRemoved message)
+        {
+            SourceDirectoryPaths.Remove(message.Path);
         }
     }
 }
