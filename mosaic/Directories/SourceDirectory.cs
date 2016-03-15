@@ -7,23 +7,21 @@ namespace mosaic.Directories
 {
     public sealed class SourceDirectory : ISourceDirectory
     {
-        private readonly string _sourceDirectoryPath;
+        private readonly IReadOnlyCollection<string> _sourceDirectoryPaths;
 
-        public SourceDirectory(string sourceDirectoryPath)
+        public SourceDirectory(IReadOnlyCollection<string> sourceDirectoryPaths)
         {
-            _sourceDirectoryPath = sourceDirectoryPath;
+            _sourceDirectoryPaths = sourceDirectoryPaths;
         }
 
-        public Image GetImage(string name)
+        public Image GetImage(string path)
         {
-            var path = Path.Combine(_sourceDirectoryPath, name);
             return Image.FromFile(path);
         }
 
-        public IReadOnlyCollection<string> GetNames()
+        public IReadOnlyCollection<string> GetPaths()
         {
-            var paths = Directory.GetFiles(_sourceDirectoryPath, "*.jpg");
-            return paths.Select(path => Path.GetFileName(path)).ToArray();
+            return _sourceDirectoryPaths.SelectMany(p => Directory.GetFiles(p, "*.jpg")).ToArray();
         }
     }
 }

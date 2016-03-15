@@ -5,8 +5,8 @@ namespace mosaic.Directories
 {
     public interface ISourceDirectory
     {
-        Image GetImage(string name);
+        Image GetImage(string path);
 
-        IReadOnlyCollection<string> GetNames();
+        IReadOnlyCollection<string> GetPaths();
     }
 }

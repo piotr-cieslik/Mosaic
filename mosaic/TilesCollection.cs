@@ -22,10 +22,10 @@ namespace mosaic
 
         public void Fill()
         {
-            var names = _sourceDirectory.GetNames();
-            foreach (var name in names)
+            var paths = _sourceDirectory.GetPaths();
+            foreach (var path in paths)
             {
-                using (var image = _sourceDirectory.GetImage(name))
+                using (var image = _sourceDirectory.GetImage(path))
                 {
                     var resizedImage = SquareImageGenerator.Resize(image);
                     var averageHsvValue = AverageHsvValueCalculator.Calculate(resizedImage);
