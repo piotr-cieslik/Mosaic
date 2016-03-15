@@ -68,6 +68,7 @@
     <Compile Include="Commands\AddSourceDirectoryCommand.cs" />
     <Compile Include="Commands\ChooseBaseImageCommand.cs" />
     <Compile Include="Commands\ChooseOutputDirectoryCommand.cs" />
+    <Compile Include="Commands\GenerateMosaicCommand.cs" />
     <Compile Include="Commands\RemoveSourceDirectoryCommand.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="Messages\BaseImageChanged.cs" />

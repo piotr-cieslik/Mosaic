@@ -1,5 +1,4 @@
-﻿using mosaic.Directories;
-using mosaic.ui.Commands;
+﻿using mosaic.ui.Commands;
 using mosaic.ui.Messages;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -22,7 +21,7 @@ namespace mosaic.ui
             ChooseOutputDirectoryCommand = new ChooseOutputDirectoryCommand(_eventAggregator);
             AddSourceDirectoryCommand = new AddSourceDirectoryCommand(_eventAggregator);
             RemoveSourceDirectoryCommand = new RemoveSourceDirectoryCommand(_eventAggregator);
-            GenerateCommand = new DelegateCommand(Generate);
+            GenerateCommand = new GenerateMosaicCommand(_eventAggregator);
 
             _eventAggregator.Subscribe<BaseImageChanged>(OnBaseImageChanged);
             _eventAggregator.Subscribe<OutputDirectoryChanged>(OnOutputDirectoryChanged);
@@ -68,14 +67,6 @@ namespace mosaic.ui
         }
 
         public ObservableCollection<string> SourceDirectoryPaths { get; }
-
-        private void Generate()
-        {
-            var sourceDirectory = new SourceDirectory(SourceDirectoryPaths);
-            var outputDirectory = new OutputDirectory(_outputDirectoryPath);
-            var generator = new MosaicGenerator(sourceDirectory, outputDirectory);
-            generator.Generate(_baseImagePath, 320, 240, 25);
-        }
 
         private void NotifyPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
         {
