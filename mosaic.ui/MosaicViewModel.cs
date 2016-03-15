@@ -18,7 +18,7 @@ namespace mosaic.ui
             AddSourceDirectoryCommand = new DelegateCommand(AddSourceDirectory);
             RemoveSourceDirectoryCommand = new DelegateCommand(RemoveSourceDirectory);
             GenerateCommand = new DelegateCommand(Generate);
-            SourceDirectories = new ObservableCollection<string>();
+            SourceDirectoryPaths = new ObservableCollection<string>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,7 +41,7 @@ namespace mosaic.ui
 
         public string OutputDirectory
         {
-            get { return _baseImagePath; }
+            get { return _outputDirectory; }
             set
             {
                 _outputDirectory = value;
@@ -51,9 +51,9 @@ namespace mosaic.ui
 
         public ICommand RemoveSourceDirectoryCommand { get; }
 
-        public string SelectedSourceDirectory { get; set; }
+        public string SelectedSourceDirectoryPath { get; set; }
 
-        public ObservableCollection<string> SourceDirectories { get; }
+        public ObservableCollection<string> SourceDirectoryPaths { get; }
 
         private void AddSourceDirectory()
         {
@@ -62,7 +62,7 @@ namespace mosaic.ui
                 DialogResult result = dialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    SourceDirectories.Add(dialog.SelectedPath);
+                    SourceDirectoryPaths.Add(dialog.SelectedPath);
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace mosaic.ui
 
         private void Generate()
         {
-            var sourceDirectory = new SourceDirectory(SourceDirectories);
+            var sourceDirectory = new SourceDirectory(SourceDirectoryPaths);
             var outputDirectory = new OutputDirectory(_outputDirectory);
             var generator = new MosaicGenerator(sourceDirectory, outputDirectory);
             generator.Generate(_baseImagePath, 320, 240, 25);
@@ -107,10 +107,10 @@ namespace mosaic.ui
 
         private void RemoveSourceDirectory()
         {
-            var selectedSourceDirectory = SelectedSourceDirectory;
+            var selectedSourceDirectory = SelectedSourceDirectoryPath;
             if (selectedSourceDirectory != null)
             {
-                SourceDirectories.Remove(selectedSourceDirectory);
+                SourceDirectoryPaths.Remove(selectedSourceDirectory);
             }
         }
     }
