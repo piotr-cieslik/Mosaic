@@ -1,4 +1,5 @@
 ﻿using mosaic.Directories;
+using mosaic.ui.EventAggregation;
 using mosaic.ui.Messages;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,12 @@ namespace mosaic.ui.Commands
 {
     internal sealed class GenerateMosaicCommand : ICommand
     {
-        private readonly EventAggregator.EventAggregator _eventAggregator;
+        private readonly EventAggregator _eventAggregator;
         private string _baseImagePath;
         private string _outputDirectoryPath;
         private List<string> _sourceDirectoryPaths = new List<string>();
 
-        public GenerateMosaicCommand(EventAggregator.EventAggregator eventAggregator)
+        public GenerateMosaicCommand(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe<BaseImageChanged>(OnBaseImageChanged);

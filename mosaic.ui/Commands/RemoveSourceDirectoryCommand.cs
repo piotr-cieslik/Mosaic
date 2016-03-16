@@ -1,4 +1,5 @@
-﻿using mosaic.ui.Messages;
+﻿using mosaic.ui.EventAggregation;
+using mosaic.ui.Messages;
 using System;
 using System.Windows.Input;
 
@@ -6,10 +7,10 @@ namespace mosaic.ui.Commands
 {
     internal sealed class RemoveSourceDirectoryCommand : ICommand
     {
-        private readonly EventAggregator.EventAggregator _eventAggregator;
+        private readonly EventAggregator _eventAggregator;
         private string _currentSelection;
 
-        public RemoveSourceDirectoryCommand(EventAggregator.EventAggregator eventAggregator)
+        public RemoveSourceDirectoryCommand(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe<SourceDirectorySelectionChanged>(OnSourceDirectorySelectionChanged);

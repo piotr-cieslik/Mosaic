@@ -71,6 +71,9 @@
     <Compile Include="Commands\GenerateMosaicCommand.cs" />
     <Compile Include="Commands\RemoveSourceDirectoryCommand.cs" />
     <Compile Include="DelegateCommand.cs" />
+    <Compile Include="EventAggregation\EventAggregator.cs" />
+    <Compile Include="EventAggregation\IMessage.cs" />
+    <Compile Include="EventAggregation\Subscription.cs" />
     <Compile Include="Messages\BaseImageChanged.cs" />
     <Compile Include="Messages\OutputDirectoryChanged.cs" />
     <Compile Include="Messages\SourceDirectoryRemoved.cs" />
@@ -110,10 +113,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EventAggregator\EventAggregator.csproj">
-      <Project>{a336bc74-f48e-4434-83c9-3ab240ca3127}</Project>
-      <Name>EventAggregator</Name>
-    </ProjectReference>
     <ProjectReference Include="..\mosaic\mosaic.csproj">
       <Project>{a37c5f59-5a3c-4709-ac3d-cb51b008e5c7}</Project>
       <Name>mosaic</Name>

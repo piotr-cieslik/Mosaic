@@ -1,4 +1,5 @@
-﻿using mosaic.ui.Messages;
+﻿using mosaic.ui.EventAggregation;
+using mosaic.ui.Messages;
 using System;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -7,9 +8,9 @@ namespace mosaic.ui.Commands
 {
     internal sealed class AddSourceDirectoryCommand : ICommand
     {
-        private readonly EventAggregator.EventAggregator _eventAggregator;
+        private readonly EventAggregator _eventAggregator;
 
-        public AddSourceDirectoryCommand(EventAggregator.EventAggregator eventAggregator)
+        public AddSourceDirectoryCommand(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
         }

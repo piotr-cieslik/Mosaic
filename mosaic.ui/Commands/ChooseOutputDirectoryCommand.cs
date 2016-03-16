@@ -1,4 +1,5 @@
-﻿using mosaic.ui.Messages;
+﻿using mosaic.ui.EventAggregation;
+using mosaic.ui.Messages;
 using System;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -7,9 +8,9 @@ namespace mosaic.ui.Commands
 {
     internal sealed class ChooseOutputDirectoryCommand : ICommand
     {
-        private readonly EventAggregator.EventAggregator _eventAggregator;
+        private readonly EventAggregator _eventAggregator;
 
-        public ChooseOutputDirectoryCommand(EventAggregator.EventAggregator eventAggregator)
+        public ChooseOutputDirectoryCommand(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
         }

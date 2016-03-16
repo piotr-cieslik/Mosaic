@@ -1,4 +1,5 @@
 ﻿using mosaic.ui.Commands;
+using mosaic.ui.EventAggregation;
 using mosaic.ui.Messages;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ namespace mosaic.ui
 {
     internal sealed class MosaicViewModel : INotifyPropertyChanged
     {
-        private readonly EventAggregator.EventAggregator _eventAggregator;
+        private readonly EventAggregator _eventAggregator;
         private string _baseImagePath;
         private string _outputDirectoryPath;
 
@@ -16,7 +17,7 @@ namespace mosaic.ui
         {
             SourceDirectoryPaths = new ObservableCollection<string>();
 
-            _eventAggregator = new EventAggregator.EventAggregator();
+            _eventAggregator = new EventAggregator();
             ChooseBaseImageCommand = new ChooseBaseImageCommand(_eventAggregator);
             ChooseOutputDirectoryCommand = new ChooseOutputDirectoryCommand(_eventAggregator);
             AddSourceDirectoryCommand = new AddSourceDirectoryCommand(_eventAggregator);

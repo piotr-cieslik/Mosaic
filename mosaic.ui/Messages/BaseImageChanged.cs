@@ -1,4 +1,4 @@
-﻿using EventAggregator;
+﻿using mosaic.ui.EventAggregation;
 
 namespace mosaic.ui.Messages
 {
