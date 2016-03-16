@@ -70,7 +70,6 @@
     <Compile Include="Commands\ChooseOutputDirectoryCommand.cs" />
     <Compile Include="Commands\GenerateMosaicCommand.cs" />
     <Compile Include="Commands\RemoveSourceDirectoryCommand.cs" />
-    <Compile Include="DelegateCommand.cs" />
     <Compile Include="EventAggregation\EventAggregator.cs" />
     <Compile Include="EventAggregation\IMessage.cs" />
     <Compile Include="EventAggregation\Subscription.cs" />
