@@ -40,7 +40,7 @@ namespace mosaic.ui
             set
             {
                 _baseImagePath = value;
-                NotifyPropertyChanged();
+                PropertyChanged.Raise(this);
             }
         }
 
@@ -56,7 +56,7 @@ namespace mosaic.ui
             set
             {
                 _outputDirectoryPath = value;
-                NotifyPropertyChanged();
+                PropertyChanged.Raise(this);
             }
         }
 
@@ -68,11 +68,6 @@ namespace mosaic.ui
         }
 
         public ObservableCollection<string> SourceDirectoryPaths { get; }
-
-        private void NotifyPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         private void OnBaseImageChanged(BaseImageChanged message)
         {
