@@ -17,7 +17,7 @@ namespace mosaic.ui
         {
             SourceDirectoryPaths = new ObservableCollection<string>();
 
-            _eventAggregator = new EventAggregator();
+            _eventAggregator = EventAggregatorProvider.GetInstance();
             ChooseBaseImageCommand = new ChooseBaseImageCommand(_eventAggregator);
             ChooseOutputDirectoryCommand = new ChooseOutputDirectoryCommand(_eventAggregator);
             AddSourceDirectoryCommand = new AddSourceDirectoryCommand(_eventAggregator);

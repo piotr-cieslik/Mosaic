@@ -72,6 +72,7 @@
     <Compile Include="Commands\GenerateMosaicCommand.cs" />
     <Compile Include="Commands\RemoveSourceDirectoryCommand.cs" />
     <Compile Include="EventAggregation\EventAggregator.cs" />
+    <Compile Include="EventAggregation\EventAggregatorProvider.cs" />
     <Compile Include="EventAggregation\IMessage.cs" />
     <Compile Include="EventAggregation\Subscription.cs" />
     <Compile Include="Messages\BaseImageChanged.cs" />

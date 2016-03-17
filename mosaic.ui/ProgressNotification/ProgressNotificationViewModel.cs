@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
+﻿using mosaic.ui.EventAggregation;
+using System.ComponentModel;
 
 namespace mosaic.ui.ProgressNotification
 {
     internal sealed class ProgressNotificationViewModel : INotifyPropertyChanged
     {
+        private readonly EventAggregator _eventAggregator;
         private int _maximum;
 
         private string _status;
@@ -12,6 +14,7 @@ namespace mosaic.ui.ProgressNotification
 
         public ProgressNotificationViewModel()
         {
+            _eventAggregator = EventAggregatorProvider.GetInstance();
             Status = ":(";
             Maximum = 50;
             Value = 10;
