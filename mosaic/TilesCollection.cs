@@ -20,14 +20,14 @@ namespace mosaic
             _random = new Random(0);
         }
 
-        public void Fill()
+        public void Fill(int tileSize)
         {
             var paths = _sourceDirectory.GetPaths();
             foreach (var path in paths)
             {
                 using (var image = _sourceDirectory.GetImage(path))
                 {
-                    var resizedImage = SquareImageGenerator.Resize(image);
+                    var resizedImage = SquareImageGenerator.Resize(image, tileSize);
                     var averageHsvValue = AverageHsvValueCalculator.Calculate(resizedImage);
                     _tiles.Add(new Tile(resizedImage, averageHsvValue));
                 }

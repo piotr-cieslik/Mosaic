@@ -5,16 +5,14 @@ namespace mosaic
 {
     internal static class SquareImageGenerator
     {
-        private const int OutputImageResolution = 50;
-        private static readonly Rectangle _outputArea = new Rectangle(0, 0, OutputImageResolution, OutputImageResolution);
-
-        public static Image Resize(Image sourceImage)
+        public static Image Resize(Image sourceImage, int tileSize)
         {
+            var outputArea = new Rectangle(0, 0, tileSize, tileSize);
             var sourceArea = CreateSourceArea(sourceImage);
-            var outputImage = new Bitmap(_outputArea.Width, _outputArea.Height);
+            var outputImage = new Bitmap(outputArea.Width, outputArea.Height);
             using (var graphic = Graphics.FromImage(outputImage))
             {
-                graphic.DrawImage(sourceImage, _outputArea, sourceArea, GraphicsUnit.Pixel);
+                graphic.DrawImage(sourceImage, outputArea, sourceArea, GraphicsUnit.Pixel);
             }
             FixOutputImageOrientationBasedOnSourceExifInformation(sourceImage, outputImage);
             return outputImage;

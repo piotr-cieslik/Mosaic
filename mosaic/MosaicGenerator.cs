@@ -9,7 +9,6 @@ namespace mosaic
     {
         private readonly IOutputDirectory _outputDirectory;
         private readonly ISourceDirectory _sourceDirectory;
-        private readonly TilesCollection _tilesCollection;
 
         public MosaicGenerator(
             ISourceDirectory sourceDirectory,
@@ -17,8 +16,6 @@ namespace mosaic
         {
             _sourceDirectory = sourceDirectory;
             _outputDirectory = outputDirectory;
-
-            _tilesCollection = new TilesCollection(sourceDirectory);
         }
 
         public void Generate(string basicImagePath, int width, int height, int tileSize)
@@ -26,7 +23,8 @@ namespace mosaic
             var basicImage = Image.FromFile(basicImagePath);
             var basicImageSamll = new Bitmap(Resize(basicImage, width, height));
 
-            _tilesCollection.Fill();
+            var tilesCollection = new TilesCollection(_sourceDirectory);
+            tilesCollection.Fill(tileSize);
 
             var outputImage = new Bitmap(width * tileSize, height * tileSize);
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
@@ -38,7 +36,7 @@ namespace mosaic
                     for (var y = 0; y < height; y++)
                     {
                         var hsv = basicImageSamll.GetPixel(x, y).ToHsv();
-                        var temporaryImage = _tilesCollection.FindTileSimilarToColor(hsv);
+                        var temporaryImage = tilesCollection.FindTileSimilarToColor(hsv);
                         using (var tile = temporaryImage.ChangeHueAndSaturation(hsv))
                         {
                             var targetArea = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
