@@ -15,9 +15,11 @@ namespace mosaic.ui.ProgressNotification
         public ProgressNotificationViewModel()
         {
             _eventAggregator = EventAggregatorProvider.GetInstance();
-            Status = ":(";
-            Maximum = 50;
-            Value = 10;
+            Maximum = 1;
+            Value = 0;
+
+            _eventAggregator.Subscribe<ProcessedImage>(OnProcessedImage);
+            _eventAggregator.Subscribe<GeneratedTile>(OnGeneratedTile);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,6 +52,20 @@ namespace mosaic.ui.ProgressNotification
                 _value = value;
                 PropertyChanged.Raise(this);
             }
+        }
+
+        private void OnGeneratedTile(GeneratedTile message)
+        {
+            Status = string.Format("Generowanie {0} / {1}", message.Value, message.Maximum);
+            Value = message.Value;
+            Maximum = message.Maximum;
+        }
+
+        private void OnProcessedImage(ProcessedImage message)
+        {
+            Status = string.Format("Przetwarzanie {0} / {1}", message.Value, message.Maximum);
+            Value = message.Value;
+            Maximum = message.Maximum;
         }
     }
 }

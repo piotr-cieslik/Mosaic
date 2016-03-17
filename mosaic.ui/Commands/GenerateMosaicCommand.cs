@@ -36,9 +36,9 @@ namespace mosaic.ui.Commands
         {
             var sourceDirectory = new SourceDirectory(_sourceDirectoryPaths);
             var outputDirectory = new OutputDirectory(_outputDirectoryPath);
-            var progressNotificator = new ProgressNotificator();
+            var progressNotificator = new ProgressNotificator(_eventAggregator);
             var generator = new MosaicGenerator(sourceDirectory, outputDirectory, progressNotificator);
-            await Task.Run(() => generator.Generate(_baseImagePath, 320, 240, 50));
+            await Task.Run(() => generator.Generate(_baseImagePath, 160, 120, 50));
         }
 
         private void OnBaseImageChanged(BaseImageChanged message)

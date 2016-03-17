@@ -91,6 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MosaicViewModel.cs" />
+    <Compile Include="ProgressNotification\GeneratedTile.cs" />
+    <Compile Include="ProgressNotification\ProcessedImage.cs" />
     <Compile Include="ProgressNotification\ProgressNotificationView.xaml.cs">
       <DependentUpon>ProgressNotificationView.xaml</DependentUpon>
     </Compile>
