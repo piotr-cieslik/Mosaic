@@ -18,7 +18,7 @@ namespace mosaic.tests
             graphic.FillRectangle(Brushes.Black, 1, 0, 1, 2);
 
             var result = AverageHsvValueCalculator.Calculate(bitmap);
-            var expected = 0.5m;
+            var expected = 0.5;
 
             Assert.AreEqual(expected, result);
         }
@@ -48,7 +48,7 @@ namespace mosaic.tests
             graphic.FillRectangle(Brushes.White, 0, 0, 2, 2);
 
             var result = AverageHsvValueCalculator.Calculate(bitmap);
-            var expected = 1m;
+            var expected = 1;
 
             Assert.AreEqual(expected, result);
         }
