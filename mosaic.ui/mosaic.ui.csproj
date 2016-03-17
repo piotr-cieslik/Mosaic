@@ -95,6 +95,7 @@
       <DependentUpon>ProgressNotificationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProgressNotification\ProgressNotificationViewModel.cs" />
+    <Compile Include="ProgressNotification\ProgressNotificator.cs" />
     <Compile Include="RaisePropertyChanged.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

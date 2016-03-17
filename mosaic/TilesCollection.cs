@@ -9,13 +9,15 @@ namespace mosaic
     internal sealed class TilesCollection
     {
         private const float BaseTolerance = 0.1f;
+        private readonly IProgressNotificator _progressNotificator;
         private readonly Random _random;
         private readonly ISourceDirectory _sourceDirectory;
         private readonly List<Tile> _tiles;
 
-        public TilesCollection(ISourceDirectory sourceDirectory)
+        public TilesCollection(ISourceDirectory sourceDirectory, IProgressNotificator progressNotificator)
         {
             _sourceDirectory = sourceDirectory;
+            _progressNotificator = progressNotificator;
             _tiles = new List<Tile>();
             _random = new Random(0);
         }
@@ -23,6 +25,8 @@ namespace mosaic
         public void Fill(int tileSize)
         {
             var paths = _sourceDirectory.GetPaths();
+            var totalImages = paths.Count;
+            var processedImages = 0;
             foreach (var path in paths)
             {
                 using (var image = _sourceDirectory.GetImage(path))
@@ -31,6 +35,8 @@ namespace mosaic
                     var averageHsvValue = AverageHsvValueCalculator.Calculate(resizedImage);
                     _tiles.Add(new Tile(resizedImage, averageHsvValue));
                 }
+                processedImages++;
+                _progressNotificator.NotifyPreprocesingProgress(processedImages, totalImages);
             }
         }
 

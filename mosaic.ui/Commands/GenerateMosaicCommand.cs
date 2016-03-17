@@ -1,6 +1,7 @@
 ﻿using mosaic.Directories;
 using mosaic.ui.EventAggregation;
 using mosaic.ui.Messages;
+using mosaic.ui.ProgressNotification;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -35,7 +36,8 @@ namespace mosaic.ui.Commands
         {
             var sourceDirectory = new SourceDirectory(_sourceDirectoryPaths);
             var outputDirectory = new OutputDirectory(_outputDirectoryPath);
-            var generator = new MosaicGenerator(sourceDirectory, outputDirectory);
+            var progressNotificator = new ProgressNotificator();
+            var generator = new MosaicGenerator(sourceDirectory, outputDirectory, progressNotificator);
             await Task.Run(() => generator.Generate(_baseImagePath, 320, 240, 50));
         }
 

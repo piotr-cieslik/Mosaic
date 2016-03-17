@@ -1,6 +1,5 @@
 ﻿using mosaic.ColorSpaces;
 using mosaic.Directories;
-using System;
 using System.Drawing;
 
 namespace mosaic
@@ -8,14 +7,17 @@ namespace mosaic
     public sealed class MosaicGenerator
     {
         private readonly IOutputDirectory _outputDirectory;
+        private readonly IProgressNotificator _progressNotificator;
         private readonly ISourceDirectory _sourceDirectory;
 
         public MosaicGenerator(
             ISourceDirectory sourceDirectory,
-            IOutputDirectory outputDirectory)
+            IOutputDirectory outputDirectory,
+            IProgressNotificator progressNotificator)
         {
             _sourceDirectory = sourceDirectory;
             _outputDirectory = outputDirectory;
+            _progressNotificator = progressNotificator;
         }
 
         public void Generate(string basicImagePath, int width, int height, int tileSize)
@@ -23,12 +25,14 @@ namespace mosaic
             var basicImage = Image.FromFile(basicImagePath);
             var basicImageSamll = new Bitmap(Resize(basicImage, width, height));
 
-            var tilesCollection = new TilesCollection(_sourceDirectory);
+            var tilesCollection = new TilesCollection(_sourceDirectory, _progressNotificator);
             tilesCollection.Fill(tileSize);
 
             var outputImage = new Bitmap(width * tileSize, height * tileSize);
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
 
+            var totalTiles = width * height;
+            var processedTiles = 0;
             using (var g = Graphics.FromImage(outputImage))
             {
                 for (var x = 0; x < width; x++)
@@ -43,7 +47,8 @@ namespace mosaic
                             g.DrawImage(tile, targetArea, sourceArea, GraphicsUnit.Pixel);
                         }
                     }
-                    Console.WriteLine(x * 1.0 / width);
+                    processedTiles++;
+                    _progressNotificator.NotifyGeneratingProgress(processedTiles, totalTiles);
                 }
             }
 
