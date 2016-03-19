@@ -9,69 +9,49 @@
         xmlns:sourceDirectoriesSelection="clr-namespace:mosaic.ui.SourceDirectoriesSelection"
         Title="mosaic"
         Width="500"
+        ResizeMode="CanMinimize"
         SizeToContent="Height"
         mc:Ignorable="d">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="100" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+    <StackPanel>
+        <GroupBox Header="Na jakim obrazie mam bazwoać?">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         IsReadOnly="True"
+                         Text="{Binding BaseImagePath}" />
+                <Button Grid.Column="1"
+                        Command="{Binding ChooseBaseImageCommand}"
+                        Content="Wybierz" />
+            </Grid>
 
-            <RowDefinition Height="auto" />
+        </GroupBox>
 
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+        <GroupBox Header="Gdzie mam zapisać wygenerowany obraz?">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         IsReadOnly="True"
+                         Text="{Binding OutputDirectoryPath}" />
+                <Button Grid.Column="1"
+                        Command="{Binding ChooseOutputDirectoryCommand}"
+                        Content="Wybierz" />
+            </Grid>
 
-            <RowDefinition Height="auto" />
+        </GroupBox>
 
-            <RowDefinition Height="auto" />
+        <sourceDirectoriesSelection:SourceDirectoriesSelectionView />
 
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
 
-        <Label Grid.Row="0"
-               Grid.Column="0"
-               Content="Na jakim obrazie mam bazwoać?" />
-        <TextBox Grid.Row="1"
-                 Grid.Column="0"
-                 IsReadOnly="True"
-                 Text="{Binding BaseImagePath}" />
-        <Button Grid.Row="1"
-                Grid.Column="1"
-                Command="{Binding ChooseBaseImageCommand}"
-                Content="Wybierz" />
+        <resolutionSettings:ResolutionSettingsView />
 
-        <sourceDirectoriesSelection:SourceDirectoriesSelectionView Grid.Row="2"
-                                                                   Grid.Column="0"
-                                                                   Grid.ColumnSpan="2" />
+        <Button Command="{Binding GenerateCommand}" Content="Generuj" />
 
-        <Label Grid.Row="3"
-               Grid.Column="0"
-               Content="Gdzie mam zapisać wygenerowany obraz?" />
-        <TextBox Grid.Row="4"
-                 Grid.Column="0"
-                 IsReadOnly="True"
-                 Text="{Binding OutputDirectoryPath}" />
-        <Button Grid.Row="4"
-                Grid.Column="1"
-                Command="{Binding ChooseOutputDirectoryCommand}"
-                Content="Wybierz" />
-
-        <resolutionSettings:ResolutionSettingsView Grid.Row="5"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2" />
-
-        <Button Grid.Row="6"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Command="{Binding GenerateCommand}"
-                Content="Generuj" />
-
-        <progressNotification:ProgressNotificationView Grid.Row="7"
-                                                       Grid.Column="0"
-                                                       Grid.ColumnSpan="2" />
-    </Grid>
+        <progressNotification:ProgressNotificationView />
+    </StackPanel>
 </Window>
