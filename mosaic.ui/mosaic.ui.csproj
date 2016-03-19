@@ -58,6 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OutputDirectorySelection\OutputDirectorySelectionView.xaml.cs">
+      <DependentUpon>OutputDirectorySelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OutputDirectorySelection\OutputDirectorySelectionViewModel.cs" />
     <Compile Include="ResolutionSettings\ImageResolution.cs" />
     <Compile Include="ResolutionSettings\ImageResolutionChanged.cs" />
     <Compile Include="ResolutionSettings\ResolutionSettingsView.xaml.cs">
@@ -80,7 +84,7 @@
     </Compile>
     <Compile Include="SourceDirectoriesSelection\AddSourceDirectory.cs" />
     <Compile Include="Commands\ChooseBaseImageCommand.cs" />
-    <Compile Include="Commands\ChooseOutputDirectoryCommand.cs" />
+    <Compile Include="OutputDirectorySelection\SelectOutputDirectory.cs" />
     <Compile Include="Commands\GenerateMosaicCommand.cs" />
     <Compile Include="SourceDirectoriesSelection\RemoveSourceDirectory.cs" />
     <Compile Include="EventAggregation\EventAggregator.cs" />
@@ -88,7 +92,7 @@
     <Compile Include="EventAggregation\IMessage.cs" />
     <Compile Include="EventAggregation\Subscription.cs" />
     <Compile Include="Messages\BaseImageChanged.cs" />
-    <Compile Include="Messages\OutputDirectoryChanged.cs" />
+    <Compile Include="OutputDirectorySelection\OutputDirectoryChanged.cs" />
     <Compile Include="SourceDirectoriesSelection\SourceDirectoryRemoved.cs" />
     <Compile Include="SourceDirectoriesSelection\SourceDirectoryAdded.cs" />
     <Compile Include="SourceDirectoriesSelection\SourceDirectorySelected.cs" />
@@ -96,6 +100,10 @@
       <DependentUpon>MosaicView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OutputDirectorySelection\OutputDirectorySelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ProgressNotification\ProgressNotificationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

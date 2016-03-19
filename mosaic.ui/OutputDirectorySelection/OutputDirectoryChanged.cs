@@ -1,6 +1,6 @@
 ﻿using mosaic.ui.EventAggregation;
 
-namespace mosaic.ui.Messages
+namespace mosaic.ui.OutputDirectorySelection
 {
     internal sealed class OutputDirectoryChanged : IMessage
     {

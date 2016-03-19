@@ -1,6 +1,7 @@
 ﻿using mosaic.Directories;
 using mosaic.ui.EventAggregation;
 using mosaic.ui.Messages;
+using mosaic.ui.OutputDirectorySelection;
 using mosaic.ui.ProgressNotification;
 using mosaic.ui.ResolutionSettings;
 using mosaic.ui.SourceDirectoriesSelection;

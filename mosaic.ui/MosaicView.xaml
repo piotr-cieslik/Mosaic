@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:mosaic.ui"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:outputDirectorySelection="clr-namespace:mosaic.ui.OutputDirectorySelection"
         xmlns:progressNotification="clr-namespace:mosaic.ui.ProgressNotification"
         xmlns:resolutionSettings="clr-namespace:mosaic.ui.ResolutionSettings"
         xmlns:sourceDirectoriesSelection="clr-namespace:mosaic.ui.SourceDirectoriesSelection"
@@ -29,25 +30,8 @@
 
         </GroupBox>
 
-        <GroupBox Header="Gdzie mam zapisać wygenerowany obraz?">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="100" />
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0"
-                         IsReadOnly="True"
-                         Text="{Binding OutputDirectoryPath}" />
-                <Button Grid.Column="1"
-                        Command="{Binding ChooseOutputDirectoryCommand}"
-                        Content="Wybierz" />
-            </Grid>
-
-        </GroupBox>
-
+        <outputDirectorySelection:OutputDirectorySelectionView />
         <sourceDirectoriesSelection:SourceDirectoriesSelectionView />
-
-
         <resolutionSettings:ResolutionSettingsView />
 
         <Button Command="{Binding GenerateCommand}" Content="Generuj" />
