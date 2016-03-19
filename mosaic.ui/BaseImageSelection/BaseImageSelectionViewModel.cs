@@ -1,23 +1,20 @@
-﻿using mosaic.ui.Commands;
-using mosaic.ui.EventAggregation;
-using mosaic.ui.Messages;
+﻿using mosaic.ui.EventAggregation;
 using System.ComponentModel;
 using System.Windows.Input;
 
-namespace mosaic.ui
+namespace mosaic.ui.BaseImageSelection
 {
-    internal sealed class MosaicViewModel : INotifyPropertyChanged
+    internal sealed class BaseImageSelectionViewModel : INotifyPropertyChanged
     {
         private readonly EventAggregator _eventAggregator;
         private string _baseImagePath;
 
-        public MosaicViewModel()
+        public BaseImageSelectionViewModel()
         {
             _eventAggregator = EventAggregatorProvider.GetInstance();
-            ChooseBaseImageCommand = new ChooseBaseImageCommand(_eventAggregator);
-            GenerateCommand = new GenerateMosaicCommand(_eventAggregator);
+            SelectBaseImageCommand = new SelectBaseImage(_eventAggregator);
 
-            _eventAggregator.Subscribe<BaseImageChanged>(OnBaseImageChanged);
+            _eventAggregator.Subscribe<BaseImageSelected>(OnBaseImageChanged);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,11 +29,9 @@ namespace mosaic.ui
             }
         }
 
-        public ICommand ChooseBaseImageCommand { get; }
+        public ICommand SelectBaseImageCommand { get; }
 
-        public ICommand GenerateCommand { get; }
-
-        private void OnBaseImageChanged(BaseImageChanged message)
+        private void OnBaseImageChanged(BaseImageSelected message)
         {
             BaseImagePath = message.Path;
         }

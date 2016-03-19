@@ -1,6 +1,6 @@
 ﻿using mosaic.Directories;
+using mosaic.ui.BaseImageSelection;
 using mosaic.ui.EventAggregation;
-using mosaic.ui.Messages;
 using mosaic.ui.OutputDirectorySelection;
 using mosaic.ui.ProgressNotification;
 using mosaic.ui.ResolutionSettings;
@@ -25,7 +25,7 @@ namespace mosaic.ui.Commands
         public GenerateMosaicCommand(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            _eventAggregator.Subscribe<BaseImageChanged>(OnBaseImageChanged);
+            _eventAggregator.Subscribe<BaseImageSelected>(OnBaseImageChanged);
             _eventAggregator.Subscribe<OutputDirectoryChanged>(OnOutputDirectoryChanged);
             _eventAggregator.Subscribe<SourceDirectoryAdded>(OnSourceDirectoryAdded);
             _eventAggregator.Subscribe<SourceDirectoryRemoved>(OnSourceDirectoryRemoved);
@@ -59,7 +59,7 @@ namespace mosaic.ui.Commands
                 _tileResolution.Resolution));
         }
 
-        private void OnBaseImageChanged(BaseImageChanged message)
+        private void OnBaseImageChanged(BaseImageSelected message)
         {
             _baseImagePath = message.Path;
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);

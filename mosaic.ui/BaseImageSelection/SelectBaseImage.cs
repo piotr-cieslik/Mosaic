@@ -1,16 +1,15 @@
 ﻿using mosaic.ui.EventAggregation;
-using mosaic.ui.Messages;
 using System;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-namespace mosaic.ui.Commands
+namespace mosaic.ui.BaseImageSelection
 {
-    internal sealed class ChooseBaseImageCommand : ICommand
+    internal sealed class SelectBaseImage : ICommand
     {
         private readonly EventAggregator _eventAggregator;
 
-        public ChooseBaseImageCommand(EventAggregator eventAggregator)
+        public SelectBaseImage(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
         }
@@ -30,7 +29,7 @@ namespace mosaic.ui.Commands
                 DialogResult result = dialog.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    _eventAggregator.Publish(new BaseImageChanged(dialog.FileName));
+                    _eventAggregator.Publish(new BaseImageSelected(dialog.FileName));
                 }
             }
         }

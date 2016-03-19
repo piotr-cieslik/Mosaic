@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BaseImageSelection\BaseImageSelectionView.xaml.cs">
+      <DependentUpon>BaseImageSelectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OutputDirectorySelection\OutputDirectorySelectionView.xaml.cs">
       <DependentUpon>OutputDirectorySelectionView.xaml</DependentUpon>
     </Compile>
@@ -74,6 +77,10 @@
       <DependentUpon>SourceDirectoriesSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SourceDirectoriesSelection\SourceDirectoriesSelectionViewModel.cs" />
+    <Page Include="BaseImageSelection\BaseImageSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MosaicView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,7 +90,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SourceDirectoriesSelection\AddSourceDirectory.cs" />
-    <Compile Include="Commands\ChooseBaseImageCommand.cs" />
+    <Compile Include="BaseImageSelection\SelectBaseImage.cs" />
     <Compile Include="OutputDirectorySelection\SelectOutputDirectory.cs" />
     <Compile Include="Commands\GenerateMosaicCommand.cs" />
     <Compile Include="SourceDirectoriesSelection\RemoveSourceDirectory.cs" />
@@ -91,7 +98,7 @@
     <Compile Include="EventAggregation\EventAggregatorProvider.cs" />
     <Compile Include="EventAggregation\IMessage.cs" />
     <Compile Include="EventAggregation\Subscription.cs" />
-    <Compile Include="Messages\BaseImageChanged.cs" />
+    <Compile Include="BaseImageSelection\BaseImageSelected.cs" />
     <Compile Include="OutputDirectorySelection\OutputDirectoryChanged.cs" />
     <Compile Include="SourceDirectoriesSelection\SourceDirectoryRemoved.cs" />
     <Compile Include="SourceDirectoriesSelection\SourceDirectoryAdded.cs" />
@@ -118,7 +125,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MosaicViewModel.cs" />
+    <Compile Include="BaseImageSelection\BaseImageSelectionViewModel.cs" />
     <Compile Include="ProgressNotification\GeneratedTile.cs" />
     <Compile Include="ProgressNotification\ProcessedImage.cs" />
     <Compile Include="ProgressNotification\ProgressNotificationView.xaml.cs">
