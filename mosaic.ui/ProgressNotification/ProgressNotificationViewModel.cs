@@ -56,14 +56,14 @@ namespace mosaic.ui.ProgressNotification
 
         private void OnGeneratedTile(GeneratedTile message)
         {
-            Status = string.Format("Generowanie {0} / {1}", message.Value, message.Maximum);
+            Status = string.Format("Generowanie kafelek {0} / {1}", message.Value, message.Maximum);
             Value = message.Value;
             Maximum = message.Maximum;
         }
 
         private void OnProcessedImage(ProcessedImage message)
         {
-            Status = string.Format("Przetwarzanie {0} / {1}", message.Value, message.Maximum);
+            Status = string.Format("Przetwarzanie obrazów {0} / {1}", message.Value, message.Maximum);
             Value = message.Value;
             Maximum = message.Maximum;
         }

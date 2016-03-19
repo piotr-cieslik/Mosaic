@@ -46,9 +46,9 @@ namespace mosaic
                             var targetArea = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
                             g.DrawImage(tile, targetArea, sourceArea, GraphicsUnit.Pixel);
                         }
+                        processedTiles++;
+                        _progressNotificator.NotifyGeneratingProgress(processedTiles, totalTiles);
                     }
-                    processedTiles++;
-                    _progressNotificator.NotifyGeneratingProgress(processedTiles, totalTiles);
                 }
             }
 
