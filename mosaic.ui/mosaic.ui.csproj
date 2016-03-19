@@ -58,6 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ResolutionSettings\ImageResolution.cs" />
+    <Compile Include="ResolutionSettings\ImageResolutionChanged.cs" />
+    <Compile Include="ResolutionSettings\ResolutionSettingsView.xaml.cs">
+      <DependentUpon>ResolutionSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ResolutionSettings\ResolutionSettingsViewModel.cs" />
+    <Compile Include="ResolutionSettings\TileResolution.cs" />
+    <Compile Include="ResolutionSettings\TileResolutionChanged.cs" />
     <Page Include="MosaicView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,6 +93,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ProgressNotification\ProgressNotificationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResolutionSettings\ResolutionSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

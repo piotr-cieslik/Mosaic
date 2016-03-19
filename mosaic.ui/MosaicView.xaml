@@ -5,9 +5,10 @@
         xmlns:local="clr-namespace:mosaic.ui"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:progressNotification="clr-namespace:mosaic.ui.ProgressNotification"
+        xmlns:resolutionSettings="clr-namespace:mosaic.ui.ResolutionSettings"
         Title="mosaic"
-        Width="525"
-        Height="350"
+        Width="500"
+        SizeToContent="Height"
         mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,6 +23,8 @@
             <RowDefinition Height="auto" />
 
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+
             <RowDefinition Height="auto" />
 
             <RowDefinition Height="auto" />
@@ -67,12 +70,17 @@
                 Command="{Binding ChooseOutputDirectoryCommand}"
                 Content="Wybierz" />
 
-        <Button Grid.Row="6"
+        <resolutionSettings:ResolutionSettingsView Grid.Row="6"
+                                                   Grid.Column="0"
+                                                   Grid.ColumnSpan="2" />
+
+        <Button Grid.Row="7"
                 Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Command="{Binding GenerateCommand}"
                 Content="Generuj" />
 
-        <progressNotification:ProgressNotificationView Grid.Row="7"
+        <progressNotification:ProgressNotificationView Grid.Row="8"
                                                        Grid.Column="0"
                                                        Grid.ColumnSpan="2" />
     </Grid>
