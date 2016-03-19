@@ -15,24 +15,17 @@ namespace mosaic.ui
 
         public MosaicViewModel()
         {
-            SourceDirectoryPaths = new ObservableCollection<string>();
-
             _eventAggregator = EventAggregatorProvider.GetInstance();
             ChooseBaseImageCommand = new ChooseBaseImageCommand(_eventAggregator);
             ChooseOutputDirectoryCommand = new ChooseOutputDirectoryCommand(_eventAggregator);
-            AddSourceDirectoryCommand = new AddSourceDirectoryCommand(_eventAggregator);
-            RemoveSourceDirectoryCommand = new RemoveSourceDirectoryCommand(_eventAggregator);
             GenerateCommand = new GenerateMosaicCommand(_eventAggregator);
 
             _eventAggregator.Subscribe<BaseImageChanged>(OnBaseImageChanged);
             _eventAggregator.Subscribe<OutputDirectoryChanged>(OnOutputDirectoryChanged);
-            _eventAggregator.Subscribe<SourceDirectoryAdded>(OnSourceDirectoryAdded);
-            _eventAggregator.Subscribe<SourceDirectoryRemoved>(OnSourceDirectoryRemoved);
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public ICommand AddSourceDirectoryCommand { get; }
 
         public string BaseImagePath
         {
@@ -60,14 +53,6 @@ namespace mosaic.ui
             }
         }
 
-        public ICommand RemoveSourceDirectoryCommand { get; }
-
-        public string SelectedSourceDirectoryPath
-        {
-            set { _eventAggregator.Publish(new SourceDirectorySelectionChanged(value)); }
-        }
-
-        public ObservableCollection<string> SourceDirectoryPaths { get; }
 
         private void OnBaseImageChanged(BaseImageChanged message)
         {
@@ -77,16 +62,6 @@ namespace mosaic.ui
         private void OnOutputDirectoryChanged(OutputDirectoryChanged message)
         {
             OutputDirectoryPath = message.Path;
-        }
-
-        private void OnSourceDirectoryAdded(SourceDirectoryAdded message)
-        {
-            SourceDirectoryPaths.Add(message.Path);
-        }
-
-        private void OnSourceDirectoryRemoved(SourceDirectoryRemoved message)
-        {
-            SourceDirectoryPaths.Remove(message.Path);
         }
     }
 }

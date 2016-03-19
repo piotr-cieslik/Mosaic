@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:progressNotification="clr-namespace:mosaic.ui.ProgressNotification"
         xmlns:resolutionSettings="clr-namespace:mosaic.ui.ResolutionSettings"
+        xmlns:sourceDirectoriesSelection="clr-namespace:mosaic.ui.SourceDirectoriesSelection"
         Title="mosaic"
         Width="500"
         SizeToContent="Height"
@@ -19,7 +20,6 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
 
-            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
 
             <RowDefinition Height="auto" />
@@ -44,43 +44,33 @@
                 Command="{Binding ChooseBaseImageCommand}"
                 Content="Wybierz" />
 
-        <Label Grid.Row="2"
-               Grid.Column="0"
-               Content="Gdzie mam szukać obrazów?" />
-        <ListView Grid.Row="3"
-                  Grid.Column="0"
-                  Height="100"
-                  ItemsSource="{Binding SourceDirectoryPaths}"
-                  SelectedItem="{Binding SelectedSourceDirectoryPath,
-                                         Mode=OneWayToSource}" />
-        <StackPanel Grid.Row="3" Grid.Column="1">
-            <Button Command="{Binding AddSourceDirectoryCommand}" Content="Dodaj folder" />
-            <Button Command="{Binding RemoveSourceDirectoryCommand}" Content="Usuń folder" />
-        </StackPanel>
+        <sourceDirectoriesSelection:SourceDirectoriesSelectionView Grid.Row="2"
+                                                                   Grid.Column="0"
+                                                                   Grid.ColumnSpan="2" />
 
-        <Label Grid.Row="4"
+        <Label Grid.Row="3"
                Grid.Column="0"
                Content="Gdzie mam zapisać wygenerowany obraz?" />
-        <TextBox Grid.Row="5"
+        <TextBox Grid.Row="4"
                  Grid.Column="0"
                  IsReadOnly="True"
                  Text="{Binding OutputDirectoryPath}" />
-        <Button Grid.Row="5"
+        <Button Grid.Row="4"
                 Grid.Column="1"
                 Command="{Binding ChooseOutputDirectoryCommand}"
                 Content="Wybierz" />
 
-        <resolutionSettings:ResolutionSettingsView Grid.Row="6"
+        <resolutionSettings:ResolutionSettingsView Grid.Row="5"
                                                    Grid.Column="0"
                                                    Grid.ColumnSpan="2" />
 
-        <Button Grid.Row="7"
+        <Button Grid.Row="6"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Command="{Binding GenerateCommand}"
                 Content="Generuj" />
 
-        <progressNotification:ProgressNotificationView Grid.Row="8"
+        <progressNotification:ProgressNotificationView Grid.Row="7"
                                                        Grid.Column="0"
                                                        Grid.ColumnSpan="2" />
     </Grid>

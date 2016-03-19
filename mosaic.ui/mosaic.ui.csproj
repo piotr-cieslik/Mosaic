@@ -66,6 +66,10 @@
     <Compile Include="ResolutionSettings\ResolutionSettingsViewModel.cs" />
     <Compile Include="ResolutionSettings\TileResolution.cs" />
     <Compile Include="ResolutionSettings\TileResolutionChanged.cs" />
+    <Compile Include="SourceDirectoriesSelection\SourceDirectoriesSelectionView.xaml.cs">
+      <DependentUpon>SourceDirectoriesSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SourceDirectoriesSelection\SourceDirectoriesSelectionViewModel.cs" />
     <Page Include="MosaicView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -74,20 +78,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\AddSourceDirectoryCommand.cs" />
+    <Compile Include="SourceDirectoriesSelection\AddSourceDirectoryCommand.cs" />
     <Compile Include="Commands\ChooseBaseImageCommand.cs" />
     <Compile Include="Commands\ChooseOutputDirectoryCommand.cs" />
     <Compile Include="Commands\GenerateMosaicCommand.cs" />
-    <Compile Include="Commands\RemoveSourceDirectoryCommand.cs" />
+    <Compile Include="SourceDirectoriesSelection\RemoveSourceDirectoryCommand.cs" />
     <Compile Include="EventAggregation\EventAggregator.cs" />
     <Compile Include="EventAggregation\EventAggregatorProvider.cs" />
     <Compile Include="EventAggregation\IMessage.cs" />
     <Compile Include="EventAggregation\Subscription.cs" />
     <Compile Include="Messages\BaseImageChanged.cs" />
     <Compile Include="Messages\OutputDirectoryChanged.cs" />
-    <Compile Include="Messages\SourceDirectoryRemoved.cs" />
-    <Compile Include="Messages\SourceDirectoryAdded.cs" />
-    <Compile Include="Messages\SourceDirectorySelectionChanged.cs" />
+    <Compile Include="SourceDirectoriesSelection\SourceDirectoryRemoved.cs" />
+    <Compile Include="SourceDirectoriesSelection\SourceDirectoryAdded.cs" />
+    <Compile Include="SourceDirectoriesSelection\SourceDirectorySelectionChanged.cs" />
     <Compile Include="MosaicView.xaml.cs">
       <DependentUpon>MosaicView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -97,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ResolutionSettings\ResolutionSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SourceDirectoriesSelection\SourceDirectoriesSelectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

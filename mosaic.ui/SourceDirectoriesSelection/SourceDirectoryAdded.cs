@@ -1,6 +1,6 @@
 ﻿using mosaic.ui.EventAggregation;
 
-namespace mosaic.ui.Messages
+namespace mosaic.ui.SourceDirectoriesSelection
 {
     internal sealed class SourceDirectoryAdded : IMessage
     {

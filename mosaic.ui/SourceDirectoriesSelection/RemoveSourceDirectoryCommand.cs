@@ -3,7 +3,7 @@ using mosaic.ui.Messages;
 using System;
 using System.Windows.Input;
 
-namespace mosaic.ui.Commands
+namespace mosaic.ui.SourceDirectoriesSelection
 {
     internal sealed class RemoveSourceDirectoryCommand : ICommand
     {

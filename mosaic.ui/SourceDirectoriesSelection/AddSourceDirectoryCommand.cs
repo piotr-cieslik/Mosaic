@@ -4,7 +4,7 @@ using System;
 using System.Windows.Forms;
 using System.Windows.Input;
 
-namespace mosaic.ui.Commands
+namespace mosaic.ui.SourceDirectoriesSelection
 {
     internal sealed class AddSourceDirectoryCommand : ICommand
     {
