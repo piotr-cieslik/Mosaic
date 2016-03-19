@@ -1,16 +1,15 @@
 ﻿using mosaic.ui.EventAggregation;
-using mosaic.ui.Messages;
 using System;
 using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace mosaic.ui.SourceDirectoriesSelection
 {
-    internal sealed class AddSourceDirectoryCommand : ICommand
+    internal sealed class AddSourceDirectory : ICommand
     {
         private readonly EventAggregator _eventAggregator;
 
-        public AddSourceDirectoryCommand(EventAggregator eventAggregator)
+        public AddSourceDirectory(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
         }

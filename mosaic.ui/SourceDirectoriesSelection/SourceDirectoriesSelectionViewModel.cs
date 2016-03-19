@@ -14,8 +14,8 @@ namespace mosaic.ui.SourceDirectoriesSelection
 
             SourceDirectoryPaths = new ObservableCollection<string>();
 
-            AddSourceDirectoryCommand = new AddSourceDirectoryCommand(_eventAggregator);
-            RemoveSourceDirectoryCommand = new RemoveSourceDirectoryCommand(_eventAggregator);
+            AddSourceDirectoryCommand = new AddSourceDirectory(_eventAggregator);
+            RemoveSourceDirectoryCommand = new RemoveSourceDirectory(_eventAggregator);
 
             _eventAggregator.Subscribe<SourceDirectoryAdded>(OnSourceDirectoryAdded);
             _eventAggregator.Subscribe<SourceDirectoryRemoved>(OnSourceDirectoryRemoved);
@@ -27,7 +27,7 @@ namespace mosaic.ui.SourceDirectoriesSelection
 
         public string SelectedSourceDirectoryPath
         {
-            set { _eventAggregator.Publish(new SourceDirectorySelectionChanged(value)); }
+            set { _eventAggregator.Publish(new SourceDirectorySelected(value)); }
         }
 
         public ObservableCollection<string> SourceDirectoryPaths { get; }

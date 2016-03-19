@@ -78,11 +78,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SourceDirectoriesSelection\AddSourceDirectoryCommand.cs" />
+    <Compile Include="SourceDirectoriesSelection\AddSourceDirectory.cs" />
     <Compile Include="Commands\ChooseBaseImageCommand.cs" />
     <Compile Include="Commands\ChooseOutputDirectoryCommand.cs" />
     <Compile Include="Commands\GenerateMosaicCommand.cs" />
-    <Compile Include="SourceDirectoriesSelection\RemoveSourceDirectoryCommand.cs" />
+    <Compile Include="SourceDirectoriesSelection\RemoveSourceDirectory.cs" />
     <Compile Include="EventAggregation\EventAggregator.cs" />
     <Compile Include="EventAggregation\EventAggregatorProvider.cs" />
     <Compile Include="EventAggregation\IMessage.cs" />
@@ -91,7 +91,7 @@
     <Compile Include="Messages\OutputDirectoryChanged.cs" />
     <Compile Include="SourceDirectoriesSelection\SourceDirectoryRemoved.cs" />
     <Compile Include="SourceDirectoriesSelection\SourceDirectoryAdded.cs" />
-    <Compile Include="SourceDirectoriesSelection\SourceDirectorySelectionChanged.cs" />
+    <Compile Include="SourceDirectoriesSelection\SourceDirectorySelected.cs" />
     <Compile Include="MosaicView.xaml.cs">
       <DependentUpon>MosaicView.xaml</DependentUpon>
       <SubType>Code</SubType>

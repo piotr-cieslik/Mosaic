@@ -2,9 +2,9 @@
 
 namespace mosaic.ui.SourceDirectoriesSelection
 {
-    internal sealed class SourceDirectorySelectionChanged : IMessage
+    internal sealed class SourceDirectorySelected : IMessage
     {
-        public SourceDirectorySelectionChanged(string path)
+        public SourceDirectorySelected(string path)
         {
             Path = path;
         }

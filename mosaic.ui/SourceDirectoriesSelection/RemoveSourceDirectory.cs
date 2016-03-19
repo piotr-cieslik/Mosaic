@@ -1,19 +1,18 @@
 ﻿using mosaic.ui.EventAggregation;
-using mosaic.ui.Messages;
 using System;
 using System.Windows.Input;
 
 namespace mosaic.ui.SourceDirectoriesSelection
 {
-    internal sealed class RemoveSourceDirectoryCommand : ICommand
+    internal sealed class RemoveSourceDirectory : ICommand
     {
         private readonly EventAggregator _eventAggregator;
         private string _currentSelection;
 
-        public RemoveSourceDirectoryCommand(EventAggregator eventAggregator)
+        public RemoveSourceDirectory(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            _eventAggregator.Subscribe<SourceDirectorySelectionChanged>(OnSourceDirectorySelectionChanged);
+            _eventAggregator.Subscribe<SourceDirectorySelected>(OnSourceDirectorySelected);
         }
 
         public event EventHandler CanExecuteChanged;
@@ -28,7 +27,7 @@ namespace mosaic.ui.SourceDirectoriesSelection
             _eventAggregator.Publish(new SourceDirectoryRemoved(_currentSelection));
         }
 
-        private void OnSourceDirectorySelectionChanged(SourceDirectorySelectionChanged message)
+        private void OnSourceDirectorySelected(SourceDirectorySelected message)
         {
             _currentSelection = message.Path;
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
