@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:mosaic.ui"
              StartupUri="MosaicView.xaml">
     <Application.Resources>
-         
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5" />
+        </Style>
+
+        <Style TargetType="ProgressBar">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Height" Value="15" />
+        </Style>
     </Application.Resources>
 </Application>

@@ -15,7 +15,6 @@
 
         <Label Grid.Row="0" Content="{Binding Status}" />
         <ProgressBar Grid.Row="1"
-                     Height="5"
                      Maximum="{Binding Maximum}"
                      Value="{Binding Value}" />
     </Grid>
