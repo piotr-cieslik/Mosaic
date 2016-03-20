@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:mosaic.ui"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mosaicGeneration="clr-namespace:mosaic.ui.MosaicGeneration"
         xmlns:outputDirectorySelection="clr-namespace:mosaic.ui.OutputDirectorySelection"
         xmlns:progressNotification="clr-namespace:mosaic.ui.ProgressNotification"
         xmlns:resolutionSettings="clr-namespace:mosaic.ui.ResolutionSettings"
@@ -19,7 +20,7 @@
         <outputDirectorySelection:OutputDirectorySelectionView />
         <sourceDirectoriesSelection:SourceDirectoriesSelectionView />
         <resolutionSettings:ResolutionSettingsView />
-        <Button Command="{Binding GenerateCommand}" Content="Generuj" />
+        <mosaicGeneration:MosaicGenerationView />
         <progressNotification:ProgressNotificationView />
     </StackPanel>
 </Window>

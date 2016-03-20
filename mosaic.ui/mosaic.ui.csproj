@@ -61,6 +61,10 @@
     <Compile Include="BaseImageSelection\BaseImageSelectionView.xaml.cs">
       <DependentUpon>BaseImageSelectionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MosaicGeneration\MosaicGenerationView.xaml.cs">
+      <DependentUpon>MosaicGenerationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MosaicGeneration\MosaicGenerationViewModel.cs" />
     <Compile Include="OutputDirectorySelection\OutputDirectorySelectionView.xaml.cs">
       <DependentUpon>OutputDirectorySelectionView.xaml</DependentUpon>
     </Compile>
@@ -81,6 +85,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MosaicGeneration\MosaicGenerationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MosaicView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,7 +100,7 @@
     <Compile Include="SourceDirectoriesSelection\AddSourceDirectory.cs" />
     <Compile Include="BaseImageSelection\SelectBaseImage.cs" />
     <Compile Include="OutputDirectorySelection\SelectOutputDirectory.cs" />
-    <Compile Include="Commands\GenerateMosaicCommand.cs" />
+    <Compile Include="MosaicGeneration\Generate.cs" />
     <Compile Include="SourceDirectoriesSelection\RemoveSourceDirectory.cs" />
     <Compile Include="EventAggregation\EventAggregator.cs" />
     <Compile Include="EventAggregation\EventAggregatorProvider.cs" />

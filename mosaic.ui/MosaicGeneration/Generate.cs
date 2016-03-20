@@ -11,9 +11,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace mosaic.ui.Commands
+namespace mosaic.ui.MosaicGeneration
 {
-    internal sealed class GenerateMosaicCommand : ICommand
+    internal sealed class Generate : ICommand
     {
         private readonly EventAggregator _eventAggregator;
         private string _baseImagePath;
@@ -22,7 +22,7 @@ namespace mosaic.ui.Commands
         private List<string> _sourceDirectoryPaths = new List<string>();
         private TileResolution _tileResolution;
 
-        public GenerateMosaicCommand(EventAggregator eventAggregator)
+        public Generate(EventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe<BaseImageSelected>(OnBaseImageChanged);
