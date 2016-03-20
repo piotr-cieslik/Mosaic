@@ -2,9 +2,9 @@
 
 namespace mosaic.ui
 {
-    public partial class MosaicView : Window
+    public partial class MainView : Window
     {
-        public MosaicView()
+        public MainView()
         {
             InitializeComponent();
         }
