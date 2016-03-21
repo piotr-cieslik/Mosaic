@@ -61,6 +61,7 @@
     <Compile Include="BaseImageSelection\BaseImageSelectionView.xaml.cs">
       <DependentUpon>BaseImageSelectionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BusyControl.cs" />
     <Compile Include="MosaicGeneration\MosaicGenerationView.xaml.cs">
       <DependentUpon>MosaicGenerationView.xaml</DependentUpon>
     </Compile>
@@ -119,10 +120,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ProgressNotification\ProgressNotificationView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ResolutionSettings\ResolutionSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,9 +133,6 @@
     <Compile Include="BaseImageSelection\BaseImageSelectionViewModel.cs" />
     <Compile Include="ProgressNotification\GeneratedTile.cs" />
     <Compile Include="ProgressNotification\ProcessedImage.cs" />
-    <Compile Include="ProgressNotification\ProgressNotificationView.xaml.cs">
-      <DependentUpon>ProgressNotificationView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ProgressNotification\ProgressNotificationViewModel.cs" />
     <Compile Include="ProgressNotification\ProgressNotificator.cs" />
     <Compile Include="RaisePropertyChanged.cs" />

@@ -15,12 +15,17 @@
         ResizeMode="CanMinimize"
         SizeToContent="Height"
         mc:Ignorable="d">
-    <StackPanel>
-        <baseImageSelection:BaseImageSelectionView />
-        <outputDirectorySelection:OutputDirectorySelectionView />
-        <sourceDirectoriesSelection:SourceDirectoriesSelectionView />
-        <resolutionSettings:ResolutionSettingsView />
-        <mosaicGeneration:MosaicGenerationView />
-        <progressNotification:ProgressNotificationView />
-    </StackPanel>
+    <Window.Resources>
+        <progressNotification:ProgressNotificationViewModel x:Key="ProgressNotification" />
+    </Window.Resources>
+
+    <local:BusyControl BusyContent="{StaticResource ProgressNotification}" IsBusy="{Binding IsActive, Source={StaticResource ProgressNotification}}">
+        <StackPanel>
+            <baseImageSelection:BaseImageSelectionView />
+            <outputDirectorySelection:OutputDirectorySelectionView />
+            <sourceDirectoriesSelection:SourceDirectoriesSelectionView />
+            <resolutionSettings:ResolutionSettingsView />
+            <mosaicGeneration:MosaicGenerationView />
+        </StackPanel>
+    </local:BusyControl>
 </Window>

@@ -6,10 +6,9 @@ namespace mosaic.ui.ProgressNotification
     internal sealed class ProgressNotificationViewModel : INotifyPropertyChanged
     {
         private readonly EventAggregator _eventAggregator;
+        private bool _isActive;
         private int _maximum;
-
         private string _status;
-
         private int _value;
 
         public ProgressNotificationViewModel()
@@ -23,6 +22,16 @@ namespace mosaic.ui.ProgressNotification
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set
+            {
+                _isActive = value;
+                PropertyChanged.Raise(this);
+            }
+        }
 
         public int Maximum
         {
@@ -63,6 +72,7 @@ namespace mosaic.ui.ProgressNotification
 
         private void OnProcessedImage(ProcessedImage message)
         {
+            IsActive = true;
             Status = string.Format("Przetwarzanie obrazów {0} / {1}", message.Value, message.Maximum);
             Value = message.Value;
             Maximum = message.Maximum;
