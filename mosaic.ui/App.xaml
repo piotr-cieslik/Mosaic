@@ -20,8 +20,12 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="local:BusyControl">
                         <Grid>
-                            <ContentPresenter x:Name="PART_Content" Panel.ZIndex="0" />
-                            <ContentPresenter x:Name="PART_BusyContent" Panel.ZIndex="1" />
+                            <ContentPresenter x:Name="PART_Content"
+                                              Panel.ZIndex="0"
+                                              ContentSource="Content" />
+                            <ContentPresenter x:Name="PART_BusyContent"
+                                              Panel.ZIndex="1"
+                                              ContentSource="BusyContent" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -29,17 +33,19 @@
         </Style>
 
         <DataTemplate DataType="{x:Type progressNotification:ProgressNotificationViewModel}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
+            <Border VerticalAlignment="Stretch" Background="{x:Static SystemColors.WindowBrush}">
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Content="{Binding Status}" />
-                <ProgressBar Grid.Row="1"
-                             Maximum="{Binding Maximum}"
-                             Value="{Binding Value}" />
-            </Grid>
+                    <ProgressBar Grid.Row="0"
+                                 Maximum="{Binding Maximum}"
+                                 Value="{Binding Value}" />
+                    <Label Grid.Row="1" Content="{Binding Status}" />
+                </Grid>
+            </Border>
         </DataTemplate>
     </Application.Resources>
 </Application>

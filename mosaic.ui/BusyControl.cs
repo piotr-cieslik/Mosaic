@@ -45,10 +45,16 @@ namespace mosaic.ui
             _busyContent = Template.FindName("PART_BusyContent", this) as ContentPresenter;
             if (_busyContent != null)
             {
-                _busyContent.ContentSource = "Busy";
+                //BindingOperations.SetBinding(_busyContent, ContentControl.ContentProperty, new Binding("BusyContent") { Source = this });
+                _busyContent.ContentSource = "BusyContent";
             }
 
             _content = Template.FindName("PART_Content", this) as ContentPresenter;
+            if (_content != null)
+            {
+                _content.ContentSource = "Content";
+            }
+
             Update();
         }
 

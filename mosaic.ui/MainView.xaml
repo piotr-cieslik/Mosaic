@@ -20,12 +20,14 @@
     </Window.Resources>
 
     <local:BusyControl BusyContent="{StaticResource ProgressNotification}" IsBusy="{Binding IsActive, Source={StaticResource ProgressNotification}}">
-        <StackPanel>
-            <baseImageSelection:BaseImageSelectionView />
-            <outputDirectorySelection:OutputDirectorySelectionView />
-            <sourceDirectoriesSelection:SourceDirectoriesSelectionView />
-            <resolutionSettings:ResolutionSettingsView />
-            <mosaicGeneration:MosaicGenerationView />
-        </StackPanel>
+        <local:BusyControl.Content>
+            <StackPanel>
+                <baseImageSelection:BaseImageSelectionView />
+                <outputDirectorySelection:OutputDirectorySelectionView />
+                <sourceDirectoriesSelection:SourceDirectoriesSelectionView />
+                <resolutionSettings:ResolutionSettingsView />
+                <mosaicGeneration:MosaicGenerationView />
+            </StackPanel>
+        </local:BusyControl.Content>
     </local:BusyControl>
 </Window>
