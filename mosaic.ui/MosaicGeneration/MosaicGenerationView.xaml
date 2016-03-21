@@ -7,7 +7,7 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
-    <GroupBox>
-        <Button Command="{Binding GenerateCommand}" Content="Generuj" />
-    </GroupBox>
+    <Button Command="{Binding GenerateCommand}"
+            Content="Generuj"
+            Style="{StaticResource GenerateButton}" />
 </UserControl>
