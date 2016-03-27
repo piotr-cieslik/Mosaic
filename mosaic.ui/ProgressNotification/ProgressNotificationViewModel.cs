@@ -1,4 +1,5 @@
 ﻿using mosaic.ui.EventAggregation;
+using mosaic.ui.MosaicGeneration;
 using System.ComponentModel;
 
 namespace mosaic.ui.ProgressNotification
@@ -19,6 +20,7 @@ namespace mosaic.ui.ProgressNotification
 
             _eventAggregator.Subscribe<ProcessedImage>(OnProcessedImage);
             _eventAggregator.Subscribe<GeneratedTile>(OnGeneratedTile);
+            _eventAggregator.Subscribe<MosaicGeneratedSuccessfully>(OnMosaicGeneratedSuccessfully);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,6 +70,11 @@ namespace mosaic.ui.ProgressNotification
             Status = string.Format("Generowanie kafelek {0} / {1}", message.Value, message.Maximum);
             Value = message.Value;
             Maximum = message.Maximum;
+        }
+
+        private void OnMosaicGeneratedSuccessfully(MosaicGeneratedSuccessfully obj)
+        {
+            IsActive = false;
         }
 
         private void OnProcessedImage(ProcessedImage message)

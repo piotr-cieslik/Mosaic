@@ -1,4 +1,5 @@
 ﻿using mosaic.Directories;
+using mosaic.Exceptions;
 using mosaic.ui.BaseImageSelection;
 using mosaic.ui.EventAggregation;
 using mosaic.ui.OutputDirectorySelection;
@@ -52,11 +53,27 @@ namespace mosaic.ui.MosaicGeneration
 
             var progressNotificator = new ProgressNotificator(_eventAggregator);
             var generator = new MosaicGenerator(sourceDirectory, outputDirectory, progressNotificator);
-            await Task.Run(() => generator.Generate(
-                _baseImagePath,
-                _imageResolution.NumberOfTilesHorizaontally,
-                _imageResolution.NumberOfTilesVertically,
-                _tileResolution.Resolution));
+
+            NoImagesFoundException noImageFoundException = null;
+            await Task.Run(() =>
+            {
+                try
+                {
+                    generator.Generate(_baseImagePath, _imageResolution.NumberOfTilesHorizaontally, _imageResolution.NumberOfTilesVertically, _tileResolution.Resolution);
+                }
+                catch (NoImagesFoundException e)
+                {
+                    noImageFoundException = e;
+                }
+            });
+
+            if (noImageFoundException != null)
+            {
+                _eventAggregator.Publish(new NoImagesFound());
+                return;
+            }
+
+            _eventAggregator.Publish(new MosaicGeneratedSuccessfully());
         }
 
         private void OnBaseImageChanged(BaseImageSelected message)

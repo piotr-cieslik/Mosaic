@@ -1,5 +1,6 @@
 ﻿using mosaic.ColorSpaces;
 using mosaic.Directories;
+using mosaic.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,12 @@ namespace mosaic
             var paths = _sourceDirectory.GetPaths();
             var totalImages = paths.Count;
             var processedImages = 0;
+
+            if (paths.Count == 0)
+            {
+                throw new NoImagesFoundException();
+            }
+
             foreach (var path in paths)
             {
                 using (var image = _sourceDirectory.GetImage(path))
