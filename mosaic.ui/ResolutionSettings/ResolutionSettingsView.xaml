@@ -12,6 +12,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -33,6 +34,10 @@
                       Grid.Column="1"
                       ItemsSource="{Binding TileResolutions}"
                       SelectedItem="{Binding SelectedTileResolution}" />
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Content="{Binding OutputImageResolutionInfo}" />
         </Grid>
     </GroupBox>
 </UserControl>
