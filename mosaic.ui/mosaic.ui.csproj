@@ -62,6 +62,7 @@
       <DependentUpon>BaseImageSelectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="BusyControl.cs" />
+    <Compile Include="InverseBooleanConverter.cs" />
     <Compile Include="MosaicGeneration\MosaicGeneratedSuccessfully.cs" />
     <Compile Include="MosaicGeneration\MosaicGenerationView.xaml.cs">
       <DependentUpon>MosaicGenerationView.xaml</DependentUpon>

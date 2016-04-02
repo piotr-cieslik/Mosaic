@@ -11,6 +11,10 @@ namespace mosaic.ui.ResolutionSettings
     {
         private readonly EventAggregator _eventAggregator;
 
+        private int _customNumberOfTilesHorizaontally;
+        private int _customNumberOfTilesVertically;
+        private bool _customResolution;
+        private int _customTileResolution;
         private IEnumerable<ImageResolution> _imageResolutions;
         private string _outputImageResolutionInfo;
         private ImageResolution _selectedImageResolution;
@@ -23,9 +27,90 @@ namespace mosaic.ui.ResolutionSettings
             _eventAggregator.Subscribe<BaseImageSelected>(OnBaseImageSelected);
             _eventAggregator.Subscribe<ImageResolutionChanged>(x => GenerateOutputImageInfo());
             _eventAggregator.Subscribe<TileResolutionChanged>(x => GenerateOutputImageInfo());
+            _eventAggregator.Subscribe<ImageResolutionChanged>(OnImageResolutionChanged);
+            _eventAggregator.Subscribe<TileResolutionChanged>(OnTileResolutionChanged);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public int CustomNumberOfTilesHorizaontally
+        {
+            get
+            {
+                return _customNumberOfTilesHorizaontally;
+            }
+
+            set
+            {
+                if (_customNumberOfTilesHorizaontally == value)
+                {
+                    return;
+                }
+                _customNumberOfTilesHorizaontally = value;
+                _eventAggregator.Publish(new ImageResolutionChanged(new ImageResolution(_customNumberOfTilesHorizaontally, _customNumberOfTilesVertically)));
+                PropertyChanged.Raise(this);
+            }
+        }
+
+        public int CustomNumberOfTilesVertically
+        {
+            get
+            {
+                return _customNumberOfTilesVertically;
+            }
+
+            set
+            {
+                if (_customNumberOfTilesVertically == value)
+                {
+                    return;
+                }
+                _customNumberOfTilesVertically = value;
+
+                _eventAggregator.Publish(new ImageResolutionChanged(new ImageResolution(_customNumberOfTilesHorizaontally, _customNumberOfTilesVertically)));
+                PropertyChanged.Raise(this);
+            }
+        }
+
+        public bool CustomResolution
+        {
+            get
+            {
+                return _customResolution;
+            }
+
+            set
+            {
+                if (_customResolution == value)
+                {
+                    return;
+                }
+                _customResolution = value;
+
+                SelectedTileResolution = SelectedTileResolution;
+                SelectedImageResolution = SelectedImageResolution;
+                PropertyChanged.Raise(this);
+            }
+        }
+
+        public int CustomTileResolution
+        {
+            get
+            {
+                return _customTileResolution;
+            }
+
+            set
+            {
+                if (_customTileResolution == value)
+                {
+                    return;
+                }
+                _customTileResolution = value;
+                _eventAggregator.Publish(new TileResolutionChanged(new TileResolution(value)));
+                PropertyChanged.Raise(this);
+            }
+        }
 
         public IEnumerable<ImageResolution> ImageResolutions
         {
@@ -112,8 +197,20 @@ namespace mosaic.ui.ResolutionSettings
 
         private void GenerateOutputImageInfo()
         {
-            var horizontalResolution = SelectedTileResolution.Resolution * SelectedImageResolution.NumberOfTilesHorizaontally;
-            var verticalResolution = SelectedTileResolution.Resolution * SelectedImageResolution.NumberOfTilesVertically;
+            var horizontalResolution = 0;
+            var verticalResolution = 0;
+
+            if (CustomResolution)
+            {
+                horizontalResolution = _customTileResolution * _customNumberOfTilesHorizaontally;
+                verticalResolution = _customTileResolution * _customNumberOfTilesVertically;
+            }
+            else
+            {
+                horizontalResolution = SelectedTileResolution.Resolution * SelectedImageResolution.NumberOfTilesHorizaontally;
+                verticalResolution = SelectedTileResolution.Resolution * SelectedImageResolution.NumberOfTilesVertically;
+            }
+
             var resolutionInMpx = horizontalResolution * verticalResolution / 1000000;
             OutputImageResolutionInfo = string.Format("rozdzielczość obrazu wyjściowego: {0} x {1} ({2} Mpx)", horizontalResolution, verticalResolution, resolutionInMpx);
         }
@@ -125,6 +222,17 @@ namespace mosaic.ui.ResolutionSettings
 
             SelectedTileResolution = TileResolutions.First();
             SelectedImageResolution = ImageResolutions.First();
+        }
+
+        private void OnImageResolutionChanged(ImageResolutionChanged message)
+        {
+            CustomNumberOfTilesHorizaontally = message.ImageResolution.NumberOfTilesHorizaontally;
+            CustomNumberOfTilesVertically = message.ImageResolution.NumberOfTilesVertically;
+        }
+
+        private void OnTileResolutionChanged(TileResolutionChanged message)
+        {
+            CustomTileResolution = message.TileResolution.Resolution;
         }
     }
 }

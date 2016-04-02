@@ -5,6 +5,9 @@
              xmlns:progressNotification="clr-namespace:mosaic.ui.ProgressNotification"
              StartupUri="MainView.xaml">
     <Application.Resources>
+
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+
         <Style TargetType="GroupBox">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Padding" Value="5" />
