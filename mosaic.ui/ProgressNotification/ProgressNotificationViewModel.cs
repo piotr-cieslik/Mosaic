@@ -7,16 +7,16 @@ namespace mosaic.ui.ProgressNotification
     internal sealed class ProgressNotificationViewModel : INotifyPropertyChanged
     {
         private readonly EventAggregator _eventAggregator;
+        private int _imageProcessingProgressMaximum;
+        private int _imageProcessingProgressValue;
         private bool _isActive;
-        private int _maximum;
-        private string _status;
-        private int _value;
+        private int _mosaiGenerationProgressMaximum;
+        private int _mosaiGenerationProgressValue;
 
         public ProgressNotificationViewModel()
         {
             _eventAggregator = EventAggregatorProvider.GetInstance();
-            Maximum = 1;
-            Value = 0;
+            ResetProgressValues();
 
             _eventAggregator.Subscribe<ProcessedImage>(OnProcessedImage);
             _eventAggregator.Subscribe<GeneratedTile>(OnGeneratedTile);
@@ -24,6 +24,34 @@ namespace mosaic.ui.ProgressNotification
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public int ImageProcessingProgressMaximum
+        {
+            get
+            {
+                return _imageProcessingProgressMaximum;
+            }
+
+            set
+            {
+                _imageProcessingProgressMaximum = value;
+                PropertyChanged.Raise(this);
+            }
+        }
+
+        public int ImageProcessingProgressValue
+        {
+            get
+            {
+                return _imageProcessingProgressValue;
+            }
+
+            set
+            {
+                _imageProcessingProgressValue = value;
+                PropertyChanged.Raise(this);
+            }
+        }
 
         public bool IsActive
         {
@@ -35,54 +63,59 @@ namespace mosaic.ui.ProgressNotification
             }
         }
 
-        public int Maximum
+        public int MosaiGenerationProgressMaximum
         {
-            get { return _maximum; }
+            get
+            {
+                return _mosaiGenerationProgressMaximum;
+            }
+
             set
             {
-                _maximum = value;
+                _mosaiGenerationProgressMaximum = value;
                 PropertyChanged.Raise(this);
             }
         }
 
-        public string Status
+        public int MosaiGenerationProgressValue
         {
-            get { return _status; }
-            set
+            get
             {
-                _status = value;
-                PropertyChanged.Raise(this);
+                return _mosaiGenerationProgressValue;
             }
-        }
 
-        public int Value
-        {
-            get { return _value; }
             set
             {
-                _value = value;
+                _mosaiGenerationProgressValue = value;
                 PropertyChanged.Raise(this);
             }
         }
 
         private void OnGeneratedTile(GeneratedTile message)
         {
-            Status = string.Format("Generowanie kafelek {0} / {1}", message.Value, message.Maximum);
-            Value = message.Value;
-            Maximum = message.Maximum;
+            MosaiGenerationProgressMaximum = message.Maximum;
+            MosaiGenerationProgressValue = message.Value;
         }
 
         private void OnMosaicGeneratedSuccessfully(MosaicGeneratedSuccessfully obj)
         {
             IsActive = false;
+            ResetProgressValues();
         }
 
         private void OnProcessedImage(ProcessedImage message)
         {
             IsActive = true;
-            Status = string.Format("Przetwarzanie obrazów {0} / {1}", message.Value, message.Maximum);
-            Value = message.Value;
-            Maximum = message.Maximum;
+            ImageProcessingProgressValue = message.Value;
+            ImageProcessingProgressMaximum = message.Maximum;
+        }
+
+        private void ResetProgressValues()
+        {
+            ImageProcessingProgressMaximum = 1;
+            MosaiGenerationProgressMaximum = 1;
+            ImageProcessingProgressValue = 0;
+            MosaiGenerationProgressValue = 0;
         }
     }
 }

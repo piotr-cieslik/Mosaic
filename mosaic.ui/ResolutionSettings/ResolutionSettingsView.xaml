@@ -7,6 +7,12 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Padding" Value="0 5 0 5" />
+        </Style>
+    </UserControl.Resources>
+
     <GroupBox Header="Rozdzielczość">
         <StackPanel>
             <Grid IsEnabled="{Binding CustomResolution, Converter={StaticResource InverseBooleanConverter}}">
