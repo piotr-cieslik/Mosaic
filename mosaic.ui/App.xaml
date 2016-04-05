@@ -9,13 +9,38 @@
         <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
 
         <Style TargetType="GroupBox">
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
+            <Setter Property="Margin" Value="5 5 5 15" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Background="#2980b9" Padding="5">
+                                <ContentPresenter ContentSource="Header">
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="White" />
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </Border>
+                            <Border Grid.Row="1" Padding="0 5">
+                                <ContentPresenter />
+                            </Border>
+                        </Grid>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style TargetType="ProgressBar">
             <Setter Property="Margin" Value="5" />
             <Setter Property="Height" Value="15" />
+            <Setter Property="Foreground" Value="#2980b9" />
         </Style>
 
         <Style TargetType="local:BusyControl">
