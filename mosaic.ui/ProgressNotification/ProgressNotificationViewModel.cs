@@ -1,6 +1,6 @@
-﻿using mosaic.ui.EventAggregation;
+﻿using System.ComponentModel;
+using mosaic.ui.EventAggregation;
 using mosaic.ui.MosaicGeneration;
-using System.ComponentModel;
 
 namespace mosaic.ui.ProgressNotification
 {
@@ -21,6 +21,7 @@ namespace mosaic.ui.ProgressNotification
             _eventAggregator.Subscribe<ProcessedImage>(OnProcessedImage);
             _eventAggregator.Subscribe<GeneratedTile>(OnGeneratedTile);
             _eventAggregator.Subscribe<MosaicGeneratedSuccessfully>(OnMosaicGeneratedSuccessfully);
+            _eventAggregator.Subscribe<OutputImageIsToLarge>(OnMosaicGeneratedErroneously);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -95,6 +96,12 @@ namespace mosaic.ui.ProgressNotification
         {
             MosaiGenerationProgressMaximum = message.Maximum;
             MosaiGenerationProgressValue = message.Value;
+        }
+
+        private void OnMosaicGeneratedErroneously(OutputImageIsToLarge message)
+        {
+            IsActive = false;
+            ResetProgressValues();
         }
 
         private void OnMosaicGeneratedSuccessfully(MosaicGeneratedSuccessfully obj)

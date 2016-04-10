@@ -1,6 +1,8 @@
-﻿using mosaic.ColorSpaces;
-using mosaic.Directories;
+﻿using System;
 using System.Drawing;
+using mosaic.ColorSpaces;
+using mosaic.Directories;
+using mosaic.Exceptions;
 
 namespace mosaic
 {
@@ -28,7 +30,15 @@ namespace mosaic
             var tilesCollection = new TilesCollection(_sourceDirectory, _progressNotificator);
             tilesCollection.Fill(tileSize);
 
-            var outputImage = new Bitmap(width * tileSize, height * tileSize);
+            Bitmap outputImage;
+            try
+            {
+                outputImage = new Bitmap(width * tileSize, height * tileSize);
+            }
+            catch (ArgumentException e)
+            {
+                throw new OutputImageIsToLargeException();
+            }
             var sourceArea = new Rectangle(0, 0, tileSize, tileSize);
 
             var totalTiles = width * height;

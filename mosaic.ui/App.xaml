@@ -8,6 +8,20 @@
 
         <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
 
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Padding" Value="10 5" />
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Padding" Value="10 5" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
         <Style TargetType="GroupBox">
             <Setter Property="Margin" Value="5 5 5 15" />
             <Setter Property="Template">
@@ -60,9 +74,10 @@
             </Setter>
         </Style>
 
-        <Style x:Key="GenerateButton" TargetType="Button">
+        <Style x:Key="GenerateButton"
+               BasedOn="{StaticResource {x:Type Button}}"
+               TargetType="Button">
             <Setter Property="Margin" Value="5" />
-            <Setter Property="Padding" Value="5" />
         </Style>
 
         <DataTemplate DataType="{x:Type progressNotification:ProgressNotificationViewModel}">

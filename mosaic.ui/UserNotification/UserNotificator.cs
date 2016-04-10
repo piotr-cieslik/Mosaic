@@ -1,7 +1,7 @@
-﻿using mosaic.ui.EventAggregation;
-using mosaic.ui.MosaicGeneration;
-using System;
+﻿using System;
 using System.Windows;
+using mosaic.ui.EventAggregation;
+using mosaic.ui.MosaicGeneration;
 
 namespace mosaic.ui.UserNotification
 {
@@ -15,6 +15,7 @@ namespace mosaic.ui.UserNotification
 
             _eventAggregator.Subscribe<MosaicGeneratedSuccessfully>(OnMosaicGeneratedSuccessfully);
             _eventAggregator.Subscribe<NoImagesFound>(OnNoImagesFound);
+            _eventAggregator.Subscribe<OutputImageIsToLarge>(OnOutputImageIsToLarge);
         }
 
         private void OnMosaicGeneratedSuccessfully(MosaicGeneratedSuccessfully message)
@@ -29,6 +30,15 @@ namespace mosaic.ui.UserNotification
         private void OnNoImagesFound(NoImagesFound message)
         {
             var error = "Wybrane katalogi źródłowe nie zawierają obrazów." + Environment.NewLine + "Wybierz inne i spróbuj ponownie.";
+            MessageBox.Show(error, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void OnOutputImageIsToLarge(OutputImageIsToLarge message)
+        {
+            var error = "Obraz wyjściowy jest zbyt duży." + Environment.NewLine +
+                "Rozwiązania:" + Environment.NewLine +
+                "- zmniejsz liczbę kafelek w obrazie wyjściowym," + Environment.NewLine +
+                "- pomniejsz rozmiar pojedynczej kafelki.";
             MessageBox.Show(error, "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }

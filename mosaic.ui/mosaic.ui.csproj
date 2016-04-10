@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="MosaicGeneration\MosaicGenerationViewModel.cs" />
     <Compile Include="MosaicGeneration\NoImagesFound.cs" />
+    <Compile Include="MosaicGeneration\OutputImageIsToLarge.cs" />
     <Compile Include="OutputDirectorySelection\OutputDirectorySelectionView.xaml.cs">
       <DependentUpon>OutputDirectorySelectionView.xaml</DependentUpon>
     </Compile>

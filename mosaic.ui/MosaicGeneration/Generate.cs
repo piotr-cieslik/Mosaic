@@ -1,4 +1,9 @@
-﻿using mosaic.Directories;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using mosaic.Directories;
 using mosaic.Exceptions;
 using mosaic.ui.BaseImageSelection;
 using mosaic.ui.EventAggregation;
@@ -6,11 +11,6 @@ using mosaic.ui.OutputDirectorySelection;
 using mosaic.ui.ProgressNotification;
 using mosaic.ui.ResolutionSettings;
 using mosaic.ui.SourceDirectoriesSelection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace mosaic.ui.MosaicGeneration
 {
@@ -55,6 +55,7 @@ namespace mosaic.ui.MosaicGeneration
             var generator = new MosaicGenerator(sourceDirectory, outputDirectory, progressNotificator);
 
             NoImagesFoundException noImageFoundException = null;
+            OutputImageIsToLargeException outputImageIsToLargeException = null;
             await Task.Run(() =>
             {
                 try
@@ -65,11 +66,21 @@ namespace mosaic.ui.MosaicGeneration
                 {
                     noImageFoundException = e;
                 }
+                catch (OutputImageIsToLargeException e)
+                {
+                    outputImageIsToLargeException = e;
+                }
             });
 
             if (noImageFoundException != null)
             {
                 _eventAggregator.Publish(new NoImagesFound());
+                return;
+            }
+
+            if (outputImageIsToLargeException != null)
+            {
+                _eventAggregator.Publish(new OutputImageIsToLarge());
                 return;
             }
 
