@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F9146EED-7C82-4C4D-987B-3BBC9320DC3C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mosaic.Ui</RootNamespace>
+    <AssemblyName>Mosaic.Ui</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BaseImageSelection\BaseImageSelectionView.xaml.cs">
+      <DependentUpon>BaseImageSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BusyControl.cs" />
+    <Compile Include="InverseBooleanConverter.cs" />
+    <Compile Include="MosaicGeneration\MosaicGeneratedSuccessfully.cs" />
+    <Compile Include="MosaicGeneration\MosaicGenerationView.xaml.cs">
+      <DependentUpon>MosaicGenerationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MosaicGeneration\MosaicGenerationViewModel.cs" />
+    <Compile Include="MosaicGeneration\NoImagesFound.cs" />
+    <Compile Include="MosaicGeneration\OutputImageIsToLarge.cs" />
+    <Compile Include="OutputDirectorySelection\OutputDirectorySelectionView.xaml.cs">
+      <DependentUpon>OutputDirectorySelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OutputDirectorySelection\OutputDirectorySelectionViewModel.cs" />
+    <Compile Include="ResolutionSettings\ImageResolution.cs" />
+    <Compile Include="ResolutionSettings\ImageResolutionChanged.cs" />
+    <Compile Include="ResolutionSettings\ResolutionSettingsView.xaml.cs">
+      <DependentUpon>ResolutionSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ResolutionSettings\ResolutionSettingsViewModel.cs" />
+    <Compile Include="ResolutionSettings\TileResolution.cs" />
+    <Compile Include="ResolutionSettings\TileResolutionChanged.cs" />
+    <Compile Include="SourceDirectoriesSelection\SourceDirectoriesSelectionView.xaml.cs">
+      <DependentUpon>SourceDirectoriesSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SourceDirectoriesSelection\SourceDirectoriesSelectionViewModel.cs" />
+    <Compile Include="UserNotification\UserNotificator.cs" />
+    <Page Include="BaseImageSelection\BaseImageSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MosaicGeneration\MosaicGenerationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SourceDirectoriesSelection\AddSourceDirectory.cs" />
+    <Compile Include="BaseImageSelection\SelectBaseImage.cs" />
+    <Compile Include="OutputDirectorySelection\SelectOutputDirectory.cs" />
+    <Compile Include="MosaicGeneration\Generate.cs" />
+    <Compile Include="SourceDirectoriesSelection\RemoveSourceDirectory.cs" />
+    <Compile Include="EventAggregation\EventAggregator.cs" />
+    <Compile Include="EventAggregation\EventAggregatorProvider.cs" />
+    <Compile Include="EventAggregation\IMessage.cs" />
+    <Compile Include="EventAggregation\Subscription.cs" />
+    <Compile Include="BaseImageSelection\BaseImageSelected.cs" />
+    <Compile Include="OutputDirectorySelection\OutputDirectoryChanged.cs" />
+    <Compile Include="SourceDirectoriesSelection\SourceDirectoryRemoved.cs" />
+    <Compile Include="SourceDirectoriesSelection\SourceDirectoryAdded.cs" />
+    <Compile Include="SourceDirectoriesSelection\SourceDirectorySelected.cs" />
+    <Compile Include="MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="OutputDirectorySelection\OutputDirectorySelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResolutionSettings\ResolutionSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SourceDirectoriesSelection\SourceDirectoriesSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseImageSelection\BaseImageSelectionViewModel.cs" />
+    <Compile Include="ProgressNotification\GeneratedTile.cs" />
+    <Compile Include="ProgressNotification\ProcessedImage.cs" />
+    <Compile Include="ProgressNotification\ProgressNotificationViewModel.cs" />
+    <Compile Include="ProgressNotification\ProgressNotificator.cs" />
+    <Compile Include="RaisePropertyChanged.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mosaic\Mosaic.csproj">
+      <Project>{a37c5f59-5a3c-4709-ac3d-cb51b008e5c7}</Project>
+      <Name>Mosaic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

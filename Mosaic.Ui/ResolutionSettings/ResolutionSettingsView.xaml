@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="Mosaic.Ui.ResolutionSettings.ResolutionSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Mosaic.Ui.ResolutionSettings"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Padding" Value="0 5 0 5" />
+        </Style>
+    </UserControl.Resources>
+
+    <GroupBox Header="Rozdzielczość">
+        <StackPanel>
+            <Grid IsEnabled="{Binding CustomResolution, Converter={StaticResource InverseBooleanConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Content="liczba kafelek (poziomo x pionowo)" />
+
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Content="rozdzielczość kafelki" />
+                <ComboBox Grid.Row="1"
+                          Grid.Column="0"
+                          ItemsSource="{Binding ImageResolutions}"
+                          SelectedItem="{Binding SelectedImageResolution}" />
+                <ComboBox Grid.Row="1"
+                          Grid.Column="1"
+                          ItemsSource="{Binding TileResolutions}"
+                          SelectedItem="{Binding SelectedTileResolution}" />
+            </Grid>
+            <CheckBox Margin="0 5 0 5"
+                      Content="Własna rozdzielczosć"
+                      IsChecked="{Binding CustomResolution}" />
+            <Grid IsEnabled="{Binding CustomResolution}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Content="Liczba kafelek poziomo" />
+
+                <TextBox Grid.Row="0"
+                         Grid.Column="1"
+                         Text="{Binding CustomNumberOfTilesHorizaontally}" />
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       Content="Liczba kafelek pionowo" />
+                <TextBox Grid.Row="1"
+                         Grid.Column="1"
+                         Text="{Binding CustomNumberOfTilesVertically}" />
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Content="Rozmiar boku kafelki (px)" />
+                <TextBox Grid.Row="2"
+                         Grid.Column="1"
+                         Text="{Binding CustomTileResolution}" />
+            </Grid>
+            <Label Content="{Binding OutputImageResolutionInfo}" />
+        </StackPanel>
+    </GroupBox>
+</UserControl>

@@ -1,0 +1,96 @@
+﻿<Application x:Class="Mosaic.Ui.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Mosaic.Ui"
+             xmlns:progressNotification="clr-namespace:Mosaic.Ui.ProgressNotification"
+             StartupUri="MainView.xaml">
+    <Application.Resources>
+
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Padding" Value="10 5" />
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Padding" Value="10 5" />
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+
+        <Style TargetType="GroupBox">
+            <Setter Property="Margin" Value="5 5 5 15" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GroupBox">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Border Background="#2980b9" Padding="5">
+                                <ContentPresenter ContentSource="Header">
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="White" />
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </Border>
+                            <Border Grid.Row="1" Padding="0 5">
+                                <ContentPresenter />
+                            </Border>
+                        </Grid>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ProgressBar">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Height" Value="15" />
+            <Setter Property="Foreground" Value="#2980b9" />
+        </Style>
+
+        <Style TargetType="local:BusyControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="local:BusyControl">
+                        <Grid>
+                            <ContentPresenter x:Name="PART_Content"
+                                              Panel.ZIndex="0"
+                                              ContentSource="Content" />
+                            <ContentPresenter x:Name="PART_BusyContent"
+                                              Panel.ZIndex="1"
+                                              ContentSource="BusyContent" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GenerateButton"
+               BasedOn="{StaticResource {x:Type Button}}"
+               TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <DataTemplate DataType="{x:Type progressNotification:ProgressNotificationViewModel}">
+            <Border VerticalAlignment="Stretch" Background="{x:Static SystemColors.WindowBrush}">
+                <StackPanel VerticalAlignment="Center">
+                    <Label Content="#1: Przetwarzanie obrazów" />
+                    <ProgressBar Maximum="{Binding ImageProcessingProgressMaximum}" Value="{Binding ImageProcessingProgressValue}" />
+                    <Label Content="#2: Generowanie mozaiki" />
+                    <ProgressBar Maximum="{Binding MosaiGenerationProgressMaximum}" Value="{Binding MosaiGenerationProgressValue}" />
+                    <Label Content="{Binding Status}" />
+
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </Application.Resources>
+</Application>
